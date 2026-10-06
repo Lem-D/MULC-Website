@@ -1,0 +1,58 @@
+[
+  {
+    "title": "[Event title 1]",
+    "start": "",
+    "end": "",
+    "dateLabel": "[Weekday, Month 00]",
+    "timeLabel": "[0:00 – 0:00 PM]",
+    "month": "[MON]",
+    "day": "[00]",
+    "location": "[Room, building]",
+    "summary": "[One or two lines on what happens at this event.]",
+    "description": "[Full event description: who is speaking or hosting, what attendees will do, anything to bring, and who the event is for.]",
+    "image": "",
+    "rsvpUrl": ""
+  },
+  {
+    "title": "[Event title 2]",
+    "start": "",
+    "end": "",
+    "dateLabel": "[Weekday, Month 00]",
+    "timeLabel": "[0:00 – 0:00 PM]",
+    "month": "[MON]",
+    "day": "[00]",
+    "location": "[Room, building]",
+    "summary": "[One or two lines on what happens at this event.]",
+    "description": "[Full event description.]",
+    "image": "",
+    "rsvpUrl": ""
+  },
+  {
+    "title": "[Event title 3]",
+    "start": "",
+    "end": "",
+    "dateLabel": "[Weekday, Month 00]",
+    "timeLabel": "[0:00 – 0:00 PM]",
+    "month": "[MON]",
+    "day": "[00]",
+    "location": "[Room, building]",
+    "summary": "[One or two lines on what happens at this event.]",
+    "description": "[Full event description.]",
+    "image": "",
+    "rsvpUrl": ""
+  },
+  {
+    "title": "[Event title 4]",
+    "start": "",
+    "end": "",
+    "dateLabel": "[Weekday, Month 00]",
+    "timeLabel": "[0:00 – 0:00 PM]",
+    "month": "[MON]",
+    "day": "[00]",
+    "location": "[Room, building]",
+    "summary": "[One or two lines on what happens at this event.]",
+    "description": "[Full event description.]",
+    "image": "",
+    "rsvpUrl": ""
+  }
+]

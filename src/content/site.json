@@ -1,0 +1,44 @@
+{
+  "name": "MacEwan Law Club",
+  "shortName": "MULC",
+  "tagline": "Where MacEwan's future lawyers find their start.",
+  "intro": "[One sentence on what MULC does: speaker nights, LSAT prep, networking and mock trials for students curious about law.]",
+  "description": "The MacEwan University Law Club: speaker nights, LSAT prep, networking and mock trials for MacEwan students curious about law.",
+  "joinFormUrl": "",
+  "joinBlurb": "Open to every MacEwan student. [Cost, e.g. free.] Sign up and we'll keep you posted on every event.",
+  "email": "[club email]",
+  "location": {
+    "lines": ["MacEwan University", "[Room, building]", "Edmonton, AB"],
+    "mapsUrl": ""
+  },
+  "socials": [
+    { "label": "Instagram", "url": "" },
+    { "label": "LinkedIn", "url": "" },
+    { "label": "Discord", "url": "" }
+  ],
+  "stats": [
+    { "value": "[000]", "label": "Members" },
+    { "value": "[00]", "label": "Events hosted" },
+    { "value": "[20XX]", "label": "Founded" },
+    { "value": "[00]", "label": "Partners" }
+  ],
+  "standFor": {
+    "intro": "[One or two sentences on what MULC wants every member to walk away with.]",
+    "pillars": [
+      { "title": "Explore law careers", "body": "[Short line on speaker nights with lawyers, judges and alumni.]" },
+      { "title": "Prepare for law school", "body": "[Short line on LSAT prep and application help.]" },
+      { "title": "Build your network", "body": "[Short line on mixers and firm visits.]" },
+      { "title": "Practice advocacy", "body": "[Short line on mock trials and debates.]" }
+    ]
+  },
+  "mission": {
+    "statement": "[Mission statement in one strong sentence.]",
+    "body": "[Two or three sentences expanding on who the club serves, what it offers, and why it matters to MacEwan students interested in law.]"
+  },
+  "history": [
+    { "year": "[20XX]", "title": "Founded", "body": "[Who started the club and why.]" },
+    { "year": "[20XX]", "title": "[Milestone]", "body": "[First big event, partnership or achievement.]" },
+    { "year": "[20XX]", "title": "[Milestone]", "body": "[Growth, new programs, recognition.]" },
+    { "year": "2026", "title": "Today", "body": "[Where the club is now and what is next.]" }
+  ]
+}

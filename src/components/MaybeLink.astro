@@ -1,0 +1,8 @@
+---
+// Renders a link when a URL is set in src/content, and plain text until then.
+const { href = '', external = true, class: className, ...rest } = Astro.props;
+const ext = external && /^https?:/.test(href);
+---
+{href
+  ? <a href={href} class={className} {...(ext ? { target: '_blank', rel: 'noopener' } : {})} {...rest}><slot /></a>
+  : <span class:list={[className, 'nolink']} {...rest}><slot /></span>}

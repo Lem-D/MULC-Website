@@ -1,0 +1,32 @@
+---
+import Base from '../layouts/Base.astro';
+import Title from '../components/Title.astro';
+import MaybeLink from '../components/MaybeLink.astro';
+import site from '../content/site.json';
+import faq from '../content/faq.json';
+const hasEmail = site.email.includes('@');
+---
+<Base title="FAQ" current="faq">
+  <section class="faq">
+    <div class="wrap">
+      <div class="page-head">
+        <Title script="Frequently Asked" heading="Questions" level={1} center />
+        <div class="dbl"></div>
+      </div>
+      <div class="paper"><div class="paper-in">
+        {faq.map((item, i) => (
+          <details class="qa" name="faq" open={i === 0}>
+            <summary><span>{item.question}</span>
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#991A2D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"></path></svg>
+            </summary>
+            <p>{item.answer}</p>
+          </details>
+        ))}
+      </div></div>
+      <div class="still">
+        <div><b>Still have a question?</b><span>Send us a message and an exec will get back to you.</span></div>
+        <MaybeLink href={hasEmail ? `mailto:${site.email}` : ''} class="btn btn-primary">Email the club</MaybeLink>
+      </div>
+    </div>
+  </section>
+</Base>

@@ -1,0 +1,57 @@
+---
+import Base from '../layouts/Base.astro';
+import Title from '../components/Title.astro';
+import MaybeLink from '../components/MaybeLink.astro';
+import site from '../content/site.json';
+import execs from '../content/execs.json';
+import { asset } from '../lib/url.js';
+---
+<Base title="About Us" current="about">
+  <section class="page-head">
+    <div class="wrap">
+      <Title script="About" heading="Us" level={1} center />
+      <div class="dbl"></div>
+    </div>
+  </section>
+
+  <section class="mission" id="mission">
+    <div class="wrap">
+      <Title script="Our" heading="Mission" />
+      <div class="copy">
+        <p class="big">{site.mission.statement}</p>
+        <p>{site.mission.body}</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="history" id="history">
+    <div class="wrap">
+      <Title script="Our" heading="History" />
+      <div class="timeline">
+        {site.history.map((h) => <div class="tl"><span class="y">{h.year}</span><b>{h.title}</b><span>{h.body}</span></div>)}
+      </div>
+    </div>
+  </section>
+
+  <section class="team" id="team">
+    <div class="wrap">
+      <div class="team-head">
+        <Title script="The" heading="Executives" center />
+        <span class="yr">2026–2027</span>
+      </div>
+      <div class="execs">
+        {execs.map((p) => (
+          <article class="exec"><div class="exec-in">
+            {p.photo
+              ? <img class="shot" src={asset(p.photo)} alt={`${p.name}, ${p.role}`} style="object-fit:cover" loading="lazy">
+              : <div class="shot"><b>{p.name.charAt(0)}</b><span class="ph">[Headshot]</span></div>}
+            <h3>{p.name}</h3>
+            <span class="role">{p.role}</span>
+            <p>{p.program} · {p.bio}</p>
+            {p.linkedin && <MaybeLink href={p.linkedin} class="li">LinkedIn</MaybeLink>}
+          </div></article>
+        ))}
+      </div>
+    </div>
+  </section>
+</Base>

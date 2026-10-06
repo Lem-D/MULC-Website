@@ -1,0 +1,37 @@
+---
+import '../styles/global.css';
+import site from '../content/site.json';
+import { url } from '../lib/url.js';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+const { title, current, description = site.description } = Astro.props;
+const fullTitle = title ? `${title} | ${site.name}` : site.name;
+---
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>{fullTitle}</title>
+  <meta name="description" content={description}>
+  <meta property="og:title" content={fullTitle}>
+  <meta property="og:description" content={description}>
+  <meta property="og:image" content={new URL(url('images/mulc-logo.jpg'), Astro.site ?? Astro.url).href}>
+  <meta name="theme-color" content="#1A1214">
+  <link rel="icon" href={url('images/mulc-logo.jpg')}>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Libre+Caslon+Display&family=Pinyon+Script&display=swap">
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <Header current={current} />
+  <main id="main">
+    <slot />
+  </main>
+  <Footer />
+  <script>
+    import '../scripts/site.js';
+  </script>
+</body>
+</html>

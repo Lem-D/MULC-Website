@@ -1,0 +1,32 @@
+---
+import site from '../content/site.json';
+import { url } from '../lib/url.js';
+import MaybeLink from './MaybeLink.astro';
+const year = new Date().getFullYear();
+const hasEmail = site.email.includes('@');
+---
+<footer class="site" id="contact">
+  <div class="wrap">
+    <div class="f-grid">
+      <div class="f-col"><img src={url('images/mulc-logo.jpg')} alt="MULC logo" width="72" height="72"><span class="nm">{site.name}</span></div>
+      <div class="f-col">
+        <h3>Location</h3>
+        <address>{site.location.lines.map((line, i) => <>{i > 0 && <br />}{line}</>)}</address>
+        {site.location.mapsUrl && <a href={site.location.mapsUrl} target="_blank" rel="noopener" style="color:var(--rose)">Open in Maps</a>}
+      </div>
+      <div class="f-col">
+        <h3>Socials</h3>
+        {site.socials.map((s) => <MaybeLink href={s.url}>{s.label}</MaybeLink>)}
+        <MaybeLink href={hasEmail ? `mailto:${site.email}` : ''}>{site.email}</MaybeLink>
+      </div>
+      <div class="f-col">
+        <h3>Menu</h3>
+        <a href={url('')}>Home</a>
+        <a href={url('about/')}>About Us</a>
+        <a href={url('faq/')}>FAQ</a>
+        <a href={url('#join')}>Join</a>
+      </div>
+    </div>
+    <div class="f-bottom"><span>© {year} MacEwan University Law Club</span><span>MULC is a student club and does not provide legal advice.</span></div>
+  </div>
+</footer>

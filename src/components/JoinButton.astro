@@ -1,0 +1,10 @@
+---
+import site from '../content/site.json';
+import { url } from '../lib/url.js';
+// Points at the sign-up form once `joinFormUrl` is set in site.json.
+// Until then it scrolls to the Join section on the home page.
+const { class: className = 'btn btn-primary' } = Astro.props;
+const href = site.joinFormUrl || url('#join');
+const ext = Boolean(site.joinFormUrl);
+---
+<a class={className} href={href} {...(ext ? { target: '_blank', rel: 'noopener' } : {})}><slot>Join MULC</slot></a>

@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Name",
+    "role": "President",
+    "program": "[Program, year]",
+    "bio": "[One line bio]",
+    "photo": "",
+    "linkedin": ""
+  },
+  {
+    "name": "Name",
+    "role": "Vice President",
+    "program": "[Program, year]",
+    "bio": "[One line bio]",
+    "photo": "",
+    "linkedin": ""
+  },
+  {
+    "name": "Name",
+    "role": "VP of Events",
+    "program": "[Program, year]",
+    "bio": "[One line bio]",
+    "photo": "",
+    "linkedin": ""
+  },
+  {
+    "name": "Name",
+    "role": "VP of Finance",
+    "program": "[Program, year]",
+    "bio": "[One line bio]",
+    "photo": "",
+    "linkedin": ""
+  },
+  {
+    "name": "Name",
+    "role": "VP of Marketing",
+    "program": "[Program, year]",
+    "bio": "[One line bio]",
+    "photo": "",
+    "linkedin": ""
+  },
+  {
+    "name": "Name",
+    "role": "VP of Operations",
+    "program": "[Program, year]",
+    "bio": "[One line bio]",
+    "photo": "",
+    "linkedin": ""
+  }
+]

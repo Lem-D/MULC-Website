@@ -1,0 +1,168 @@
+---
+import Base from '../layouts/Base.astro';
+import Title from '../components/Title.astro';
+import JoinButton from '../components/JoinButton.astro';
+import MaybeLink from '../components/MaybeLink.astro';
+import site from '../content/site.json';
+import events from '../content/events.json';
+import sponsors from '../content/sponsors.json';
+import albums from '../content/albums.json';
+import { url, asset } from '../lib/url.js';
+
+// "2026-11-05T18:00" -> "20261105T180000", for the Google Calendar link.
+const gcal = (s) => s.replace(/[-:]/g, '').padEnd(15, '0');
+const calendarUrl = (e) =>
+  e.start && e.end
+    ? 'https://calendar.google.com/calendar/render?action=TEMPLATE' +
+      `&text=${encodeURIComponent(e.title)}&dates=${gcal(e.start)}/${gcal(e.end)}` +
+      `&ctz=America/Edmonton&location=${encodeURIComponent(e.location)}` +
+      `&details=${encodeURIComponent(e.description)}`
+    : '';
+
+const eventData = events.map((e) => ({ ...e, image: asset(e.image), calendarUrl: calendarUrl(e) }));
+const albumData = albums.map((a) => ({ ...a, photos: a.photos.map(asset) }));
+const x = '<path d="M6 6l12 12M18 6L6 18"></path>';
+---
+<Base current="home">
+  <section class="hero" id="top">
+    <div class="wrap">
+      <div class="hero-copy">
+        <div>
+          <div class="welcome">Welcome to</div>
+          <h1>MacEwan<br>Law Club</h1>
+        </div>
+        <div class="dbl"></div>
+        <p class="tag">{site.tagline}</p>
+        <p class="lede">{site.intro}</p>
+        <div class="row">
+          <JoinButton />
+          <a class="btn btn-ghost" href="#events">Upcoming events</a>
+        </div>
+      </div>
+      <div class="stats">
+        {site.stats.map((s) => <div class="stat"><b>{s.value}</b><span>{s.label}</span></div>)}
+      </div>
+    </div>
+  </section>
+
+  <section id="standfor">
+    <div class="wrap">
+      <div class="stand">
+        <span class="ph">[Club photo background, dark overlay]</span>
+        <div class="stand-in">
+          <Title script="What we" heading="Stand For">
+            <p class="intro">{site.standFor.intro}</p>
+          </Title>
+          <div class="pillars">
+            {site.standFor.pillars.map((p) => <div class="pillar"><b>{p.title}</b><span>{p.body}</span></div>)}
+          </div>
+          <a class="ulink" href={url('about/')} style="align-self:flex-start">Learn more about us →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="events" id="events">
+    <div class="wrap">
+      <div class="sec-head">
+        <Title script="Upcoming" heading="Events" />
+        <div class="arrows">
+          <button class="arrow" id="prevEv" aria-label="Previous events"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"></path></svg></button>
+          <button class="arrow" id="nextEv" aria-label="Next events"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"></path></svg></button>
+        </div>
+      </div>
+      <div class="track" id="track" tabindex="0" aria-label="Upcoming events, scroll sideways">
+        {events.map((e, i) => (
+          <article class="ecard"><div class="ecard-in">
+            <div class="top"><div class="date-disc"><small>{e.month}</small><b>{e.day}</b></div><span class="ph">[Event logo or icon]</span></div>
+            <h3>{e.title}</h3>
+            <div class="meta">{e.dateLabel} · {e.timeLabel}<br>{e.location}</div>
+            <p>{e.summary}</p>
+            <button class="btn btn-primary btn-sm" data-event={i}>Learn more</button>
+          </div></article>
+        ))}
+      </div>
+      <div class="dots" id="dots"></div>
+    </div>
+  </section>
+
+  <section class="sponsors" id="sponsors">
+    <div class="wrap">
+      <Title script="Our" heading="Sponsors" center />
+      <div class="sp-grid">
+        {sponsors.map((s) => (
+          <MaybeLink href={s.url} class="sp">
+            {s.logo ? <img src={asset(s.logo)} alt={s.name} style="max-height:70px;max-width:80%;object-fit:contain"> : s.name}
+          </MaybeLink>
+        ))}
+      </div>
+      <p>Interested in sponsoring MULC? <a href="#contact">Get in touch</a></p>
+    </div>
+  </section>
+
+  <section class="previous" id="previous">
+    <div class="wrap">
+      <div style="margin-bottom:40px">
+        <Title script="Previous" heading="Events"><p class="sub">Tap an event to see its photos.</p></Title>
+      </div>
+      <div class="albums">
+        {albums.map((a, i) => (
+          <button class="album" data-album={i}>
+            <span class="cover" style={a.cover ? `background:url('${asset(a.cover)}') center/cover` : undefined}>
+              {!a.cover && <span class="ph">[Album cover photo]</span>}
+            </span>
+            <span class="cap"><span><b>{a.title}</b><small>{a.date}</small></span><em>{a.photos.length || '[00]'} photos</em></span>
+          </button>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="join" id="join">
+    <div class="wrap">
+      <div class="join-band">
+        <Title script="Ready to" heading="Join MULC?"><p>{site.joinBlurb}</p></Title>
+        {site.joinFormUrl
+          ? <JoinButton class="btn btn-cream">Sign up now</JoinButton>
+          : <span class="btn btn-cream nolink">Sign-up form coming soon</span>}
+      </div>
+    </div>
+  </section>
+
+  <!-- Event popup: filled in by src/scripts/site.js from the data below -->
+  <dialog id="dlg-event" aria-labelledby="ev-title">
+    <div class="dlg"><div class="dlg-in">
+      <div class="dlg-hero" id="ev-hero"><span class="ph">[Event poster or photo]</span>
+        <button class="x" data-close aria-label="Close"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" set:html={x}></svg></button>
+      </div>
+      <div class="dlg-body">
+        <div><div class="s">Upcoming event</div><h2 id="ev-title"></h2></div>
+        <div class="facts">
+          <div class="fact"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#991A2D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"></rect><path d="M16 2v4M8 2v4M3 10h18"></path></svg><div><small>Date</small><span id="ev-date"></span></div></div>
+          <div class="fact"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#991A2D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg><div><small>Time</small><span id="ev-time"></span></div></div>
+          <div class="fact"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#991A2D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg><div><small>Location</small><span id="ev-loc"></span></div></div>
+        </div>
+        <p id="ev-desc"></p>
+        <div class="row">
+          <a class="btn btn-primary" id="ev-rsvp" target="_blank" rel="noopener">RSVP</a>
+          <a class="btn btn-outline-dk" id="ev-cal" target="_blank" rel="noopener">Add to calendar</a>
+        </div>
+      </div>
+    </div></div>
+  </dialog>
+
+  <!-- Album popup -->
+  <dialog id="dlg-album" aria-labelledby="al-title">
+    <div class="dlg"><div class="dlg-in">
+      <div class="dlg-body" style="position:relative">
+        <button class="x" data-close aria-label="Close"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" set:html={x}></svg></button>
+        <div><div class="s">Photo album</div><h2 id="al-title"></h2><p class="note" id="al-date" style="margin-top:6px"></p></div>
+        <div class="photos" id="photos"></div>
+        <a class="btn btn-outline-dk" id="al-more" target="_blank" rel="noopener" style="align-self:flex-start">See the full album</a>
+      </div>
+    </div></div>
+  </dialog>
+
+  <script type="application/json" id="events-data" set:html={JSON.stringify(eventData)}></script>
+  <script type="application/json" id="albums-data" set:html={JSON.stringify(albumData)}></script>
+</Base>
