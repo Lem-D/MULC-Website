@@ -60,7 +60,7 @@ Students who are interested in, or already part of, MULC currently have **nowher
 ├──────────────────────────────────────┤
 │ 1. Hero: logo, hook message,         │  ← landing view
 │    club statistics, Join button      │
-│ 2. Vision (over a background photo)  │
+│ 2. What We Stand For (photo bg)      │
 │ 3. Upcoming Events                   │
 │ 4. Sponsors                          │
 │ 5. Previous Events (+ photos)        │
@@ -88,13 +88,13 @@ A single list of drop-down questions.
 ### Home page
 
 #### 4.1 Hero
-- Wordmark/logo, a short **hook message** (one punchy line plus one supporting sentence).
+- Left-aligned text, no large logo (the logo stays in the header). A short **hook message** (one punchy line plus one supporting sentence).
 - **Club statistics** row: 3–4 big numbers, e.g. members, events hosted, years running, sponsors/partners. Numbers live in `site.json` so they are easy to update each term.
 - Primary CTA: **Join MULC** (to the sign-up form). Secondary: **Upcoming events** (scrolls down).
 
-#### 4.2 Vision
+#### 4.2 What We Stand For
 - Full-width section with a **club photo as the background** and a dark overlay for legibility.
-- Short vision statement plus 2×2 grid of points (e.g. what members get out of MULC).
+- Section title "*What we* / STAND FOR" (replaces "Our Vision"; same idea). Short statement plus 2×2 grid of points (e.g. what members get out of MULC).
 - "Learn more about us" link to `/about`.
 
 #### 4.3 Upcoming Events
@@ -165,7 +165,7 @@ When and why the club started, milestones so far. Can be a short timeline.
 ### Logo
 - Reuse the club's existing circular logo: burgundy disc, white serif "MACEWAN UNIVERSITY / LAW CLUB" between two rules, scales of justice below.
 - File: `public/images/mulc-logo.png` (square, at least 512×512). Also export a favicon (32×32, 180×180 apple-touch) from it.
-- Used in the header (small, ~40px), hero (large, ~160–200px), and footer.
+- Used in the header (small, ~40px) and footer. No large logo in the hero.
 
 ### Colour tokens
 | Token | Value | Source / use |
