@@ -5,19 +5,22 @@ import MaybeLink from '../components/MaybeLink.astro';
 import site from '../content/site.json';
 import execs from '../content/execs.json';
 import { asset } from '../lib/url.js';
+
+// Head start for each item in a row of `cols`, so a row lands left to right.
+const step = (i, cols) => `--d:${((i % cols) * 0.1).toFixed(2)}s`;
 ---
 <Base title="About Us" current="about">
   <section class="page-head">
     <div class="wrap">
       <Title script="About" heading="Us" level={1} center />
-      <div class="dbl"></div>
+      <div class="dbl fade_in" style="--d:.2s"></div>
     </div>
   </section>
 
   <section class="mission" id="mission">
     <div class="wrap">
       <Title script="Our" heading="Mission" />
-      <div class="copy">
+      <div class="copy flow_in_up" style="--d:.15s">
         <p class="big">{site.mission.statement}</p>
         <p>{site.mission.body}</p>
       </div>
@@ -28,7 +31,7 @@ import { asset } from '../lib/url.js';
     <div class="wrap">
       <Title script="Our" heading="History" />
       <div class="timeline">
-        {site.history.map((h) => <div class="tl"><span class="y">{h.year}</span><b>{h.title}</b><span>{h.body}</span></div>)}
+        {site.history.map((h, i) => <div class="tl flow_in_up" style={step(i, 4)}><span class="y">{h.year}</span><b>{h.title}</b><span>{h.body}</span></div>)}
       </div>
     </div>
   </section>
@@ -37,11 +40,11 @@ import { asset } from '../lib/url.js';
     <div class="wrap">
       <div class="team-head">
         <Title script="The" heading="Executives" center />
-        <span class="yr">2026–2027</span>
+        <span class="yr fade_in" style="--d:.2s">2026–2027</span>
       </div>
       <div class="execs">
-        {execs.map((p) => (
-          <article class="exec"><div class="exec-in">
+        {execs.map((p, i) => (
+          <article class="exec flow_in_up" style={step(i, 3)}><div class="exec-in">
             {p.photo
               ? <img class="shot" src={asset(p.photo)} alt={`${p.name}, ${p.role}`} style="object-fit:cover" loading="lazy">
               : <div class="shot"><b>{p.name.charAt(0)}</b><span class="ph">[Headshot]</span></div>}

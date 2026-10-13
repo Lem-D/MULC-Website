@@ -9,6 +9,10 @@ import sponsors from '../content/sponsors.json';
 import albums from '../content/albums.json';
 import { url, asset } from '../lib/url.js';
 
+// Head start for each item in a row of `cols`, so a row lands left to right rather than
+// all at once. The count restarts on the next row, which is where the eye goes next.
+const step = (i, cols) => `--d:${((i % cols) * 0.1).toFixed(2)}s`;
+
 // "2026-11-05T18:00" -> "20261105T180000", for the Google Calendar link.
 const gcal = (s) => s.replace(/[-:]/g, '').padEnd(15, '0');
 const calendarUrl = (e) =>
@@ -24,26 +28,32 @@ const albumData = albums.map((a) => ({ ...a, photos: a.photos.map(asset) }));
 const x = '<path d="M6 6l12 12M18 6L6 18"></path>';
 ---
 <Base current="home">
+  <!-- Fixed background that the page scrolls over. It shows through the "What we Stand For" panel. -->
+  <div class="page-bg" aria-hidden="true">
+    {site.backgroundVideo
+      ? <video src={asset(site.backgroundVideo)} poster={asset(site.backgroundPoster) || undefined} autoplay muted loop playsinline preload="metadata"></video>
+      : site.heroImage && <img src={asset(site.heroImage)} alt="">}
+  </div>
   <section class="hero" id="top" style={site.heroImage ? `--hero-img:url('${asset(site.heroImage)}')` : undefined}>
     <div class="hero-bg" aria-hidden="true">
       {!site.heroImage && <span class="ph">[Team photo background]</span>}
     </div>
     <div class="wrap">
       <div class="hero-copy">
-        <div>
+        <div class="flow_in_left">
           <div class="welcome">Welcome to</div>
           <h1>MacEwan<br>Law Club</h1>
         </div>
-        <div class="dbl"></div>
-        <p class="tag">{site.tagline}</p>
-        <p class="lede">{site.intro}</p>
-        <div class="row">
+        <div class="dbl flow_in_left" style="--d:.12s"></div>
+        <p class="tag flow_in_left" style="--d:.12s">{site.tagline}</p>
+        <p class="lede flow_in_left" style="--d:.24s">{site.intro}</p>
+        <div class="row flow_in_left" style="--d:.36s">
           <JoinButton />
           <a class="btn btn-ghost" href="#events">Upcoming events</a>
         </div>
       </div>
       <div class="stats">
-        {site.stats.map((s) => <div class="stat"><b>{s.value}</b><span>{s.label}</span></div>)}
+        {site.stats.map((s, i) => <div class="stat flow_in_up" style={step(i, 4)}><b>{s.value}</b><span>{s.label}</span></div>)}
       </div>
     </div>
   </section>
@@ -51,15 +61,15 @@ const x = '<path d="M6 6l12 12M18 6L6 18"></path>';
   <section id="standfor">
     <div class="wrap">
       <div class="stand">
-        <span class="ph">[Club photo background, dark overlay]</span>
+        <span class="ph">{site.backgroundVideo ? '' : '[Background video shows through here]'}</span>
         <div class="stand-in">
           <Title script="What we" heading="Stand For">
             <p class="intro">{site.standFor.intro}</p>
           </Title>
           <div class="pillars">
-            {site.standFor.pillars.map((p) => <div class="pillar"><b>{p.title}</b><span>{p.body}</span></div>)}
+            {site.standFor.pillars.map((p, i) => <div class="pillar flow_in_up" style={step(i, 3)}><b>{p.title}</b><span>{p.body}</span></div>)}
           </div>
-          <a class="ulink" href={url('about/')} style="align-self:flex-start">Learn more about us →</a>
+          <a class="ulink flow_in_up" style="--d:.3s;align-self:flex-start" href={url('about/')}>Learn more about us →</a>
         </div>
       </div>
     </div>
@@ -69,14 +79,14 @@ const x = '<path d="M6 6l12 12M18 6L6 18"></path>';
     <div class="wrap">
       <div class="sec-head">
         <Title script="Upcoming" heading="Events" />
-        <div class="arrows">
+        <div class="arrows fade_in" style="--d:.2s">
           <button class="arrow" id="prevEv" aria-label="Previous events"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"></path></svg></button>
           <button class="arrow" id="nextEv" aria-label="Next events"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"></path></svg></button>
         </div>
       </div>
       <div class="track" id="track" tabindex="0" aria-label="Upcoming events, scroll sideways">
         {events.map((e, i) => (
-          <article class="ecard"><div class="ecard-in">
+          <article class="ecard flow_in_up" style={step(i, 3)}><div class="ecard-in">
             <div class="top"><div class="date-disc"><small>{e.month}</small><b>{e.day}</b></div><span class="ph">[Event logo or icon]</span></div>
             <h3>{e.title}</h3>
             <div class="meta">{e.dateLabel} · {e.timeLabel}<br>{e.location}</div>
@@ -93,13 +103,13 @@ const x = '<path d="M6 6l12 12M18 6L6 18"></path>';
     <div class="wrap">
       <Title script="Our" heading="Sponsors" center />
       <div class="sp-grid">
-        {sponsors.map((s) => (
-          <MaybeLink href={s.url} class="sp">
+        {sponsors.map((s, i) => (
+          <MaybeLink href={s.url} class="sp flow_in_up" style={step(i, 5)}>
             {s.logo ? <img src={asset(s.logo)} alt={s.name} style="max-height:70px;max-width:80%;object-fit:contain"> : s.name}
           </MaybeLink>
         ))}
       </div>
-      <p>Interested in sponsoring MULC? <a href="#contact">Get in touch</a></p>
+      <p class="fade_in" style="--d:.2s">Interested in sponsoring MULC? <a href="#contact">Get in touch</a></p>
     </div>
   </section>
 
@@ -110,7 +120,7 @@ const x = '<path d="M6 6l12 12M18 6L6 18"></path>';
       </div>
       <div class="albums">
         {albums.map((a, i) => (
-          <button class="album" data-album={i}>
+          <button class="album flow_in_up" style={step(i, 3)} data-album={i}>
             <span class="cover" style={a.cover ? `background:url('${asset(a.cover)}') center/cover` : undefined}>
               {!a.cover && <span class="ph">[Album cover photo]</span>}
             </span>
@@ -123,7 +133,7 @@ const x = '<path d="M6 6l12 12M18 6L6 18"></path>';
 
   <section class="join" id="join">
     <div class="wrap">
-      <div class="join-band">
+      <div class="join-band flow_in_bottom">
         <Title script="Ready to" heading="Join MULC?"><p>{site.joinBlurb}</p></Title>
         {site.joinFormUrl
           ? <JoinButton class="btn btn-cream">Sign up now</JoinButton>

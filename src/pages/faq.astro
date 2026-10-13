@@ -11,9 +11,9 @@ const hasEmail = site.email.includes('@');
     <div class="wrap">
       <div class="page-head">
         <Title script="Frequently Asked" heading="Questions" level={1} center />
-        <div class="dbl"></div>
+        <div class="dbl fade_in" style="--d:.2s"></div>
       </div>
-      <div class="paper"><div class="paper-in">
+      <div class="paper flow_in_up" style="--d:.15s"><div class="paper-in">
         {faq.map((item, i) => (
           <details class="qa" name="faq" open={i === 0}>
             <summary><span>{item.question}</span>
@@ -23,7 +23,7 @@ const hasEmail = site.email.includes('@');
           </details>
         ))}
       </div></div>
-      <div class="still">
+      <div class="still flow_in_bottom">
         <div><b>Still have a question?</b><span>Send us a message and an exec will get back to you.</span></div>
         <MaybeLink href={hasEmail ? `mailto:${site.email}` : ''} class="btn btn-primary">Email the club</MaybeLink>
       </div>

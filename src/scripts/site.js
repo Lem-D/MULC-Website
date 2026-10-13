@@ -102,28 +102,51 @@ document.addEventListener('click', (e) => {
   }
 });
 
-// ----- Scroll reveal -----
-// Section content rises into place the first time it scrolls into view. Things already
-// on screen when the page loads are left alone so nothing flickers.
-if ('IntersectionObserver' in window && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
-  const groups = '.pillars, .track, .sp-grid, .albums, .execs, .timeline';
-  const targets = [];
-  $$('main section:not(.hero) .wrap > *').forEach((el) => {
-    if (el.matches(groups)) $$(':scope > *', el).forEach((c, i) => { c.style.setProperty('--d', `${Math.min(i, 5) * 0.08}s`); targets.push(c); });
-    else targets.push(el);
-  });
-  $$('.stand .pillar').forEach((c, i) => { c.style.setProperty('--d', `${0.2 + i * 0.1}s`); targets.push(c); });
-  const io = new IntersectionObserver((entries) => {
-    entries.forEach((e) => {
-      if (!e.isIntersecting) return;
-      e.target.classList.add('in');
-      io.unobserve(e.target);
-    });
-  }, { rootMargin: '0px 0px -8% 0px' });
-  targets.forEach((el) => {
+// ----- Scroll reveals -----
+// Elements with flow_in_up / flow_in_left / fade_in / flow_in_top / flow_in_bottom get .visible
+// as soon as their top edge is a little way into the viewport, so each one animates while the
+// page is still reaching it. .visible is never removed, so nothing animates back out.
+window.mulcReveal = true;
+let pending = $$('.flow_in_up, .flow_in_left, .fade_in, .flow_in_top, .flow_in_bottom');
+const reveal = () => {
+  pending = pending.filter((el) => {
     const r = el.getBoundingClientRect();
-    if (r.top < innerHeight && r.bottom > 0) return;
-    el.classList.add('reveal');
-    io.observe(el);
+    // Measure where the element sits once in place, not where its start offset has moved it.
+    const shift = el.classList.contains('flow_in_bottom') ? r.height : el.classList.contains('flow_in_top') ? -1.3 * r.height : 0;
+    const top = r.top - shift;
+    const bottom = r.bottom - shift;
+    if (bottom > innerHeight && top > innerHeight * 0.85) return true;
+    el.classList.add('visible');
+    // Once it has arrived, drop the stagger delay so hover effects respond straight away.
+    el.addEventListener('transitionend', () => el.classList.add('settled'), { once: true });
+    return false;
   });
+};
+let queued = false;
+const onScroll = () => {
+  if (queued) return;
+  queued = true;
+  requestAnimationFrame(() => { queued = false; reveal(); tuckHeader(); });
+};
+
+// ----- Header hides on scroll down (desktop only) -----
+const header = $('header.site');
+let lastY = scrollY;
+function tuckHeader() {
+  const y = scrollY;
+  const desktop = innerWidth >= 1024;
+  header?.classList.toggle('tucked', desktop && y > lastY && y > 120);
+  lastY = y;
+}
+
+addEventListener('scroll', onScroll, { passive: true });
+addEventListener('resize', onScroll);
+addEventListener('load', reveal);
+reveal();
+
+// ----- Background video: hold still for people who prefer reduced motion -----
+const bgVideo = $('.page-bg video');
+if (bgVideo && matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  bgVideo.removeAttribute('autoplay');
+  bgVideo.pause();
 }

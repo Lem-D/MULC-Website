@@ -19,6 +19,14 @@ const fullTitle = title ? `${title} | ${site.name}` : site.name;
   <meta property="og:image" content={new URL(url('images/mulc-logo.jpg'), Astro.site ?? Astro.url).href}>
   <meta name="theme-color" content="#1A1214">
   <link rel="icon" href={url('images/mulc-logo.jpg')}>
+  <script is:inline>
+    // Scroll reveals start hidden only when JavaScript runs and the visitor hasn't asked for reduced motion.
+    // If site.js never loads, everything is shown after 4 seconds.
+    if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      document.documentElement.classList.add('js-motion');
+      setTimeout(() => { if (!window.mulcReveal) document.documentElement.classList.remove('js-motion'); }, 4000);
+    }
+  </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Libre+Caslon+Display&family=Pinyon+Script&display=swap">

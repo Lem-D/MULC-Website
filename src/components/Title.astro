@@ -3,8 +3,8 @@
 const { script, heading, level = 2, center = false } = Astro.props;
 const Tag = `h${level}`;
 ---
-<div class:list={['lock', { center }]}>
-  <span class="s">{script}</span>
+<div class:list={['lock', 'flow_in_up', { center }]}>
+  <span class="s flow_in_top">{script}</span>
   <Tag class="d">{heading}</Tag>
   <slot />
 </div>
