@@ -59,6 +59,7 @@ Edit `src/content/site.json`:
 - `joinFormUrl`: the sign-up form link (e.g. a Google Form). Every **Join MULC** button uses it. Until it's set, those buttons scroll to the Join section.
 - `email`, `socials` and `location.mapsUrl`: links only appear once a URL is filled in.
 - `stats`, `standFor`, `mission` and `history`: the text on Home and About Us.
+- `heroImage`: the team photo behind the top of the Home page. Put it in `public/images/` (landscape, about 1600px wide) and set e.g. `"images/team.jpg"`. A dark overlay is added automatically so the text stays readable.
 
 ## FAQ and sponsors
 

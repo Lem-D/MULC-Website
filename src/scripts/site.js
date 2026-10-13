@@ -101,3 +101,29 @@ document.addEventListener('click', (e) => {
     $('#dlg-album').showModal();
   }
 });
+
+// ----- Scroll reveal -----
+// Section content rises into place the first time it scrolls into view. Things already
+// on screen when the page loads are left alone so nothing flickers.
+if ('IntersectionObserver' in window && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  const groups = '.pillars, .track, .sp-grid, .albums, .execs, .timeline';
+  const targets = [];
+  $$('main section:not(.hero) .wrap > *').forEach((el) => {
+    if (el.matches(groups)) $$(':scope > *', el).forEach((c, i) => { c.style.setProperty('--d', `${Math.min(i, 5) * 0.08}s`); targets.push(c); });
+    else targets.push(el);
+  });
+  $$('.stand .pillar').forEach((c, i) => { c.style.setProperty('--d', `${0.2 + i * 0.1}s`); targets.push(c); });
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((e) => {
+      if (!e.isIntersecting) return;
+      e.target.classList.add('in');
+      io.unobserve(e.target);
+    });
+  }, { rootMargin: '0px 0px -8% 0px' });
+  targets.forEach((el) => {
+    const r = el.getBoundingClientRect();
+    if (r.top < innerHeight && r.bottom > 0) return;
+    el.classList.add('reveal');
+    io.observe(el);
+  });
+}

@@ -24,7 +24,10 @@ const albumData = albums.map((a) => ({ ...a, photos: a.photos.map(asset) }));
 const x = '<path d="M6 6l12 12M18 6L6 18"></path>';
 ---
 <Base current="home">
-  <section class="hero" id="top">
+  <section class="hero" id="top" style={site.heroImage ? `--hero-img:url('${asset(site.heroImage)}')` : undefined}>
+    <div class="hero-bg" aria-hidden="true">
+      {!site.heroImage && <span class="ph">[Team photo background]</span>}
+    </div>
     <div class="wrap">
       <div class="hero-copy">
         <div>
