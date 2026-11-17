@@ -2,36 +2,38 @@
   "name": "MacEwan Law Club",
   "shortName": "MULC",
   "tagline": "Where MacEwan's future lawyers find their start.",
-  "intro": "[One sentence on what MULC does: speaker nights, LSAT prep, networking and mock trials for students curious about law.]",
+  "intro": "We are an enthusiastic collective of students providing networking opportunities for all students who are eager to jumpstart a career in the legal industry.",
   "heroImage": "",
   "backgroundVideo": "",
   "backgroundPoster": "",
   "description": "The MacEwan University Law Club: speaker nights, LSAT prep, networking and mock trials for MacEwan students curious about law.",
-  "joinFormUrl": "",
-  "joinBlurb": "Open to every MacEwan student. [Cost, e.g. free.] Sign up and we'll keep you posted on every event.",
-  "email": "[club email]",
+  "campusLabsUrl": "https://samu.campuslabs.ca/engage/organization/mulc",
+  "membershipFee": "[Membership fee, e.g. free or $00 a year]",
+  "joinBlurb": "Membership runs through MacEwan's Campus Labs. It takes about two minutes with your MacEwan login.",
+  "email": "mulawclub@gmail.com",
   "location": {
-    "lines": ["MacEwan University", "[Room, building]", "Edmonton, AB"],
+    "lines": ["MacEwan University", "10700 104 Ave NW", "Edmonton, AB T5J 4S2"],
     "mapsUrl": ""
   },
   "socials": [
-    { "label": "Instagram", "url": "" },
-    { "label": "LinkedIn", "url": "" },
+    { "label": "Instagram", "url": "https://www.instagram.com/macewanlawclub/" },
+    { "label": "LinkedIn", "url": "https://www.linkedin.com/company/mulc/" },
+    { "label": "Facebook", "url": "https://www.facebook.com/MULawClub" },
     { "label": "Discord", "url": "" }
   ],
   "stats": [
     { "value": "[000]", "label": "Members" },
     { "value": "[00]", "label": "Events hosted" },
-    { "value": "[20XX]", "label": "Founded" },
+    { "value": "2021", "label": "Founded" },
     { "value": "[00]", "label": "Partners" }
   ],
   "standFor": {
-    "intro": "[One or two sentences on what MULC wants every member to walk away with.]",
+    "intro": "We strive to create a welcoming, all-inclusive environment that gives students the resources to prepare for their future in the legal world.",
     "pillars": [
-      { "title": "Explore law careers", "body": "[Short line on speaker nights with lawyers, judges and alumni.]" },
-      { "title": "Prepare for law school", "body": "[Short line on LSAT prep and application help.]" },
-      { "title": "Build your network", "body": "[Short line on mixers and firm visits.]" },
-      { "title": "Practice advocacy", "body": "[Short line on mock trials and debates.]" }
+      { "title": "Explore the legal field", "body": "Open discussions about the work of lawyers, paralegals, legal assistants and more." },
+      { "title": "See legal work up close", "body": "Shadow sessions that give students a taste of day-to-day legal work." },
+      { "title": "Connect and prepare", "body": "Panel discussions, Meet the Firm, Mock LSATs and application assistance days." },
+      { "title": "Fellowship and leadership", "body": "A community where students support each other and grow as leaders." }
     ]
   },
   "mission": {
@@ -39,7 +41,7 @@
     "body": "[Two or three sentences expanding on who the club serves, what it offers, and why it matters to MacEwan students interested in law.]"
   },
   "history": [
-    { "year": "[20XX]", "title": "Founded", "body": "[Who started the club and why.]" },
+    { "year": "2021", "title": "Founded", "body": "[Who started the club and why.]" },
     { "year": "[20XX]", "title": "[Milestone]", "body": "[First big event, partnership or achievement.]" },
     { "year": "[20XX]", "title": "[Milestone]", "body": "[Growth, new programs, recognition.]" },
     { "year": "2026", "title": "Today", "body": "[Where the club is now and what is next.]" }
