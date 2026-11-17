@@ -1,0 +1,161 @@
+---
+import Base from '../layouts/Base.astro';
+import MaybeLink from '../components/MaybeLink.astro';
+import partners from '../content/partners.json';
+import sponsors from '../content/sponsors.json';
+import events from '../content/events.json';
+import { url, asset } from '../lib/url.js';
+
+const step = (i, cols) => `--d:${((i % cols) * 0.1).toFixed(2)}s`;
+const hasEmail = partners.email.includes('@');
+const mailto = hasEmail ? `mailto:${partners.email}` : '';
+const pkg = partners.package;
+const formAction = partners.formspreeId ? `https://formspree.io/f/${partners.formspreeId}` : '';
+const eventOptions = events.map((e) => `${e.title} · ${e.dateTbd ? 'Date TBD' : e.dateLabel}`);
+const x = '<path d="M6 6l12 12M18 6L6 18"></path>';
+const down = '<path d="M12 4v12M6 11l6 6 6-6M5 20h14"></path>';
+---
+<Base
+  title="Partner with us"
+  current="partners"
+  shareTitle="Partner with the MacEwan Law Club"
+  description="Sponsor an event or the whole year. Reach MacEwan's future lawyers and hear back from the club directly."
+  shareImage="images/share/partners.png"
+  shareImageAlt={`MacEwan Law Club logo with the words "Partner with MacEwan's future lawyers"`}
+>
+  <section class="p-hero">
+    <div class="wrap">
+      <div class="p-hero-copy">
+        <div class="lock flow_in_left">
+          <span class="s">Partner with</span>
+          <h1 class="d">MacEwan's future lawyers</h1>
+        </div>
+        <p class="lede flow_in_left" style="--d:.12s">{partners.pitch}</p>
+        <div class="row flow_in_left" style="--d:.24s">
+          <a class="btn btn-primary" href="#contact" data-inquiry="event">Sponsor an event</a>
+          <a class="btn btn-ghost" href="#contact" data-inquiry="general">Become a general sponsor</a>
+        </div>
+      </div>
+      <div class="p-card flow_in_up" style="--d:.2s">
+        <span class="eyebrow">Quickest way to reach us</span>
+        <MaybeLink href={mailto} class="p-email">{partners.email}</MaybeLink>
+        <a class="p-dl" href="#package"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" set:html={down}></svg>Download our sponsor package (PDF)</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="p-stats" aria-label="MULC in numbers">
+    <div class="wrap">
+      {partners.stats.map((s, i) => <div class="stat flow_in_up" style={step(i, 4)}><b>{s.value}</b><span>{s.label}</span></div>)}
+    </div>
+  </section>
+
+  <section class="p-ways" aria-labelledby="ways-h">
+    <div class="wrap">
+      <div class="lock flow_in_up">
+        <span class="s flow_in_top">Two ways to</span>
+        <h2 class="d" id="ways-h">Get involved</h2>
+      </div>
+      <div class="p-options">
+        {partners.options.map((o, i) => (
+          <article class="p-option flow_in_up" style={step(i, 2)}>
+            <span class="eyebrow">{o.label}</span>
+            <h3>{o.title}</h3>
+            <p>{o.body}</p>
+            <ul>{o.perks.map((perk) => <li>{perk}</li>)}</ul>
+            <a class="btn btn-primary btn-sm" href="#contact" data-inquiry={o.kind}>{o.button}</a>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="p-package" id="package" aria-labelledby="pkg-h">
+    <div class="wrap">
+      <div class="pkg-band flow_in_bottom">
+        <div class="pkg-cover" aria-hidden="true"><img src={url('images/mulc-logo.jpg')} alt="" width="44" height="44"><span>Sponsor<br>package</span></div>
+        <div class="pkg-copy">
+          <h2 id="pkg-h">{pkg.title}</h2>
+          <p>{pkg.body}</p>
+          <span class="pkg-meta">{pkg.details}</span>
+        </div>
+        <div class="pkg-actions">
+          {pkg.pdf
+            ? <a class="btn btn-cream" href={asset(pkg.pdf)} download>Download PDF<svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" set:html={down}></svg></a>
+            : <span class="btn btn-cream nolink soon">PDF coming soon</span>}
+          {(pkg.viewUrl || pkg.pdf) && <a class="btn btn-ghost-light" href={pkg.viewUrl || asset(pkg.pdf)} target="_blank" rel="noopener">View online</a>}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="p-contact" id="contact" aria-labelledby="contact-h">
+    <div class="wrap">
+      <div class="p-contact-head">
+        <div class="flow_in_up">
+          <h2 class="d" id="contact-h">Get in touch</h2>
+          <p>Have a question or an idea for an event? Send us a note and we'll get back to you.</p>
+        </div>
+        <a class="btn btn-primary fade_in" style="--d:.2s" href={mailto || '#contact'} data-inquiry="event">Start an inquiry</a>
+      </div>
+      <div class="p-email-box flow_in_up" style="--d:.1s">
+        <span class="eyebrow">Email</span>
+        <MaybeLink href={mailto} class="p-email">{partners.email}</MaybeLink>
+      </div>
+    </div>
+  </section>
+
+  <section class="p-current" aria-labelledby="cur-h">
+    <div class="wrap">
+      <h2 class="d flow_in_up" id="cur-h">Current partners</h2>
+      <div class="sp-grid">
+        {sponsors.map((s, i) => (
+          <MaybeLink href={s.url} class="sp flow_in_up" style={step(i, 5)}>
+            {s.logo ? <img src={asset(s.logo)} alt={s.name} style="max-height:70px;max-width:80%;object-fit:contain"> : s.name}
+          </MaybeLink>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Partner inquiry popup. Opens from any [data-inquiry] button; src/scripts/site.js sets the topic. -->
+  <dialog id="dlg-inquiry" class="dlg-dark" aria-labelledby="inq-h">
+    <div class="inq">
+      <button class="x" data-close aria-label="Close"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" set:html={x}></svg></button>
+      <div>
+        <h2 id="inq-h">Partner with MULC</h2>
+        <p class="inq-sub">Tell us a bit about your firm and what you have in mind.</p>
+      </div>
+      <form id="inq-form" action={formAction || undefined} method="POST">
+        <input type="hidden" name="_subject" value="New partner inquiry from the MULC website">
+        <input type="hidden" name="interest" id="inq-interest" value="Sponsoring an event">
+        <fieldset>
+          <legend>I'm interested in</legend>
+          <div class="seg" role="group" aria-label="I'm interested in">
+            <button type="button" data-kind="event" aria-pressed="true">Sponsoring an event</button>
+            <button type="button" data-kind="general" aria-pressed="false">General sponsorship</button>
+          </div>
+        </fieldset>
+        <div class="f-grid2">
+          <label class="f">Your name<input type="text" name="name" autocomplete="name" required></label>
+          <label class="f">Firm or organization<input type="text" name="organization" autocomplete="organization" required></label>
+          <label class="f">Email<input type="email" name="email" autocomplete="email" required></label>
+          <label class="f">Phone (optional)<input type="tel" name="phone" autocomplete="tel"></label>
+        </div>
+        <label class="f" id="inq-event-field">Which event?
+          <select name="event">
+            {eventOptions.map((o) => <option>{o}</option>)}
+            <option>Suggest a new event</option>
+          </select>
+        </label>
+        <label class="f">Message<textarea name="message" rows="3" placeholder="Tell us a little about what you have in mind."></textarea></label>
+        <div class="inq-foot">
+          {formAction
+            ? <button type="submit" class="btn btn-primary">Send inquiry</button>
+            : <><span class="inq-off">The form isn't connected yet. {hasEmail ? <>Email <a href={mailto}>{partners.email}</a> instead.</> : 'Please check back soon.'}</span><button type="submit" class="btn btn-primary" disabled>Send inquiry</button></>}
+        </div>
+        <p class="inq-status" id="inq-status" role="status"></p>
+      </form>
+    </div>
+  </dialog>
+</Base>
