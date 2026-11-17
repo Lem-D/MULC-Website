@@ -59,7 +59,6 @@ Keep each photo under about 500 KB (resize to 1600px wide) so the site stays fas
 Every **Join MULC** button goes to the Join page (`/join/`), which sends students on to Campus Labs.
 
 - `campusLabsUrl` in `src/content/site.json`: MULC's Campus Labs page, e.g. `"https://samu.campuslabs.ca/engage/organization/mulc"`. Until it's set, the Campus Labs buttons show "Campus Labs link coming soon".
-- `membershipFee` in `src/content/site.json`: one line such as `"Free"` or `"$10 a year"`. It shows in the Join requirements and the Join band on Home.
 - `src/content/join.json`: the intro, the 4 steps and the requirements. The requirements follow Article III of the constitution, so update them if the constitution changes.
 
 ## Club info and socials

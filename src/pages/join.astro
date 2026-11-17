@@ -8,8 +8,8 @@ import { url } from '../lib/url.js';
 
 const hasEmail = site.email.includes('@');
 const check = '<path d="M5 12l5 5 9-10"></path>';
-// Requirements come from Article III of the constitution, plus the fee from site.json.
-const requirements = [...join.requirements.slice(0, 2), site.membershipFee, ...join.requirements.slice(2)].filter(Boolean);
+// Requirements come from Article III of the constitution.
+const requirements = join.requirements;
 ---
 <Base title="Join MULC" current="join" description="How to join the MacEwan Law Club on Campus Labs: four steps and who can become a member.">
   <section class="j-head">

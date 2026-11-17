@@ -8,7 +8,6 @@
   "backgroundPoster": "",
   "description": "The MacEwan University Law Club: speaker nights, LSAT prep, networking and mock trials for MacEwan students curious about law.",
   "campusLabsUrl": "https://samu.campuslabs.ca/engage/organization/mulc",
-  "membershipFee": "[Membership fee, e.g. free or $00 a year]",
   "joinBlurb": "Membership runs through MacEwan's Campus Labs. It takes about two minutes with your MacEwan login.",
   "email": "mulawclub@gmail.com",
   "location": {
@@ -18,8 +17,7 @@
   "socials": [
     { "label": "Instagram", "url": "https://www.instagram.com/macewanlawclub/" },
     { "label": "LinkedIn", "url": "https://www.linkedin.com/company/mulc/" },
-    { "label": "Facebook", "url": "https://www.facebook.com/MULawClub" },
-    { "label": "Discord", "url": "" }
+    { "label": "Facebook", "url": "https://www.facebook.com/MULawClub" }
   ],
   "stats": [
     { "value": "[000]", "label": "Members" },
