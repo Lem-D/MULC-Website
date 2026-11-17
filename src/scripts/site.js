@@ -66,14 +66,15 @@ document.addEventListener('click', (e) => {
   if (t.dataset.event) {
     const ev = events[+t.dataset.event];
     $('#ev-title').textContent = ev.title;
-    $('#ev-date').textContent = ev.dateLabel;
-    $('#ev-time').textContent = ev.timeLabel;
-    $('#ev-loc').textContent = ev.location;
+    $('#ev-date').textContent = ev.dateText;
+    $('#ev-time').textContent = ev.timeText;
+    $('#ev-loc').textContent = ev.locationText;
     $('#ev-desc').textContent = ev.description;
     $('#ev-hero').style.background = ev.image ? `url('${ev.image}') center/cover` : '';
     $('#ev-hero .ph').hidden = Boolean(ev.image);
     setLink($('#ev-rsvp'), ev.rsvpUrl);
     setLink($('#ev-cal'), ev.calendarUrl);
+    $('#ev-rsvp-note').hidden = !ev.rsvpUrl;
     $('#dlg-event').showModal();
   } else {
     const al = albums[+t.dataset.album];
@@ -101,6 +102,48 @@ document.addEventListener('click', (e) => {
     $('#dlg-album').showModal();
   }
 });
+
+// ----- Partner inquiry popup (Partner with us page) -----
+// Any element with data-inquiry="event" or "general" opens the form with that topic picked.
+const inq = $('#dlg-inquiry');
+if (inq) {
+  const form = $('#inq-form');
+  const status = $('#inq-status');
+  const pick = (kind) => {
+    $$('.seg button', inq).forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.kind === kind)));
+    $('#inq-interest').value = kind === 'event' ? 'Sponsoring an event' : 'General sponsorship';
+    $('#inq-event-field').hidden = kind !== 'event';
+  };
+  $$('.seg button', inq).forEach((b) => b.addEventListener('click', () => pick(b.dataset.kind)));
+  $$('[data-inquiry]').forEach((t) =>
+    t.addEventListener('click', (e) => {
+      e.preventDefault();
+      pick(t.dataset.inquiry);
+      status.textContent = '';
+      inq.showModal();
+    })
+  );
+  // Sends through Formspree without leaving the page. The form stays switched off
+  // until "formspreeId" is set in src/content/partners.json.
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    if (!form.getAttribute('action')) return;
+    const btn = $('button[type="submit"]', form);
+    btn.disabled = true;
+    status.textContent = 'Sending…';
+    try {
+      const res = await fetch(form.action, { method: 'POST', body: new FormData(form), headers: { Accept: 'application/json' } });
+      if (!res.ok) throw new Error(String(res.status));
+      form.reset();
+      pick('event');
+      status.textContent = "Thanks! Your message is on its way and we'll be in touch soon.";
+    } catch {
+      status.textContent = 'Something went wrong sending your message. Please try again, or email us instead.';
+    } finally {
+      btn.disabled = false;
+    }
+  });
+}
 
 // ----- Scroll reveals -----
 // Elements with flow_in_up / flow_in_left / fade_in / flow_in_top / flow_in_bottom get .visible

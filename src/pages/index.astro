@@ -2,6 +2,7 @@
 import Base from '../layouts/Base.astro';
 import Title from '../components/Title.astro';
 import JoinButton from '../components/JoinButton.astro';
+import CampusLabsButton from '../components/CampusLabsButton.astro';
 import MaybeLink from '../components/MaybeLink.astro';
 import site from '../content/site.json';
 import events from '../content/events.json';
@@ -16,14 +17,25 @@ const step = (i, cols) => `--d:${((i % cols) * 0.1).toFixed(2)}s`;
 // "2026-11-05T18:00" -> "20261105T180000", for the Google Calendar link.
 const gcal = (s) => s.replace(/[-:]/g, '').padEnd(15, '0');
 const calendarUrl = (e) =>
-  e.start && e.end
+  !e.dateTbd && e.start && e.end
     ? 'https://calendar.google.com/calendar/render?action=TEMPLATE' +
       `&text=${encodeURIComponent(e.title)}&dates=${gcal(e.start)}/${gcal(e.end)}` +
       `&ctz=America/Edmonton&location=${encodeURIComponent(e.location)}` +
       `&details=${encodeURIComponent(e.description)}`
     : '';
 
-const eventData = events.map((e) => ({ ...e, image: asset(e.image), calendarUrl: calendarUrl(e) }));
+// Every event shows an RSVP button. Without its own "rsvpUrl" it opens the club's events
+// on Campus Labs. Events marked "dateTbd" show a TBD disc, a "Coming soon" label and no calendar button.
+const rsvpFallback = site.campusLabsUrl ? `${site.campusLabsUrl.replace(/\/$/, '')}/events` : '';
+const eventData = events.map((e) => ({
+  ...e,
+  image: asset(e.image),
+  rsvpUrl: e.rsvpUrl || rsvpFallback,
+  calendarUrl: calendarUrl(e),
+  dateText: e.dateTbd ? `Date to be announced${e.dateLabel ? ` · ${e.dateLabel}` : ''}` : e.dateLabel,
+  timeText: e.dateTbd ? e.timeLabel || 'To be announced' : e.timeLabel,
+  locationText: e.location || 'Location to be announced',
+}));
 const albumData = albums.map((a) => ({ ...a, photos: a.photos.map(asset) }));
 const x = '<path d="M6 6l12 12M18 6L6 18"></path>';
 ---
@@ -58,6 +70,25 @@ const x = '<path d="M6 6l12 12M18 6L6 18"></path>';
     </div>
   </section>
 
+  <section class="sponsors" id="sponsors" aria-labelledby="partners-h">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="lock flow_in_up">
+          <span class="s flow_in_top">Proudly supported by</span>
+          <h2 class="d" id="partners-h">Our Partners</h2>
+        </div>
+        <a class="btn btn-ghost btn-sm fade_in" style="--d:.2s" href={url('partners/')}>Partner with us<svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" set:html={'<path d="M5 12h14M13 6l6 6-6 6"></path>'}></svg></a>
+      </div>
+      <div class="sp-grid">
+        {sponsors.map((s, i) => (
+          <MaybeLink href={s.url} class="sp flow_in_up" style={step(i, 5)}>
+            {s.logo ? <img src={asset(s.logo)} alt={s.name} style="max-height:70px;max-width:80%;object-fit:contain"> : s.name}
+          </MaybeLink>
+        ))}
+      </div>
+    </div>
+  </section>
+
   <section id="standfor">
     <div class="wrap">
       <div class="stand">
@@ -85,31 +116,27 @@ const x = '<path d="M6 6l12 12M18 6L6 18"></path>';
         </div>
       </div>
       <div class="track" id="track" tabindex="0" aria-label="Upcoming events, scroll sideways">
-        {events.map((e, i) => (
-          <article class="ecard flow_in_up" style={step(i, 3)}><div class="ecard-in">
-            <div class="top"><div class="date-disc"><small>{e.month}</small><b>{e.day}</b></div><span class="ph">[Event logo or icon]</span></div>
-            <h3>{e.title}</h3>
-            <div class="meta">{e.dateLabel} · {e.timeLabel}<br>{e.location}</div>
-            <p>{e.summary}</p>
-            <button class="btn btn-primary btn-sm" data-event={i}>Learn more</button>
-          </div></article>
+        {eventData.map((e, i) => (
+          <article class="ecard flow_in_up" style={step(i, 3)}>
+            <div class="ecard-photo">
+              {e.image ? <img src={e.image} alt="" loading="lazy"> : <span class="ph">{e.dateTbd ? '[Event photo or past-year photo]' : '[Event photo]'}</span>}
+              {e.dateTbd
+                ? <div class="date-disc tbd" aria-label="Date to be announced">TBD</div>
+                : <div class="date-disc"><small>{e.month}</small><b>{e.day}</b></div>}
+            </div>
+            <div class="ecard-in">
+              <div class="ecard-title"><h3>{e.title}</h3>{e.dateTbd && <span class="soon-chip">Coming soon</span>}</div>
+              <div class="meta">{e.dateText}{e.timeLabel && !e.dateTbd && ` · ${e.timeText}`}<br>{e.locationText}</div>
+              <p>{e.summary}</p>
+              <div class="ecard-actions">
+                {e.rsvpUrl && <a class="btn btn-primary btn-sm" href={e.rsvpUrl} target="_blank" rel="noopener">RSVP</a>}
+                <button class="btn btn-outline-dk btn-sm" data-event={i}>Learn more</button>
+              </div>
+            </div>
+          </article>
         ))}
       </div>
       <div class="dots" id="dots"></div>
-    </div>
-  </section>
-
-  <section class="sponsors" id="sponsors">
-    <div class="wrap">
-      <Title script="Our" heading="Sponsors" center />
-      <div class="sp-grid">
-        {sponsors.map((s, i) => (
-          <MaybeLink href={s.url} class="sp flow_in_up" style={step(i, 5)}>
-            {s.logo ? <img src={asset(s.logo)} alt={s.name} style="max-height:70px;max-width:80%;object-fit:contain"> : s.name}
-          </MaybeLink>
-        ))}
-      </div>
-      <p class="fade_in" style="--d:.2s">Interested in sponsoring MULC? <a href="#contact">Get in touch</a></p>
     </div>
   </section>
 
@@ -134,10 +161,11 @@ const x = '<path d="M6 6l12 12M18 6L6 18"></path>';
   <section class="join" id="join">
     <div class="wrap">
       <div class="join-band flow_in_bottom">
-        <Title script="Ready to" heading="Join MULC?"><p>{site.joinBlurb}</p></Title>
-        {site.joinFormUrl
-          ? <JoinButton class="btn btn-cream">Sign up now</JoinButton>
-          : <span class="btn btn-cream nolink">Sign-up form coming soon</span>}
+        <Title script="Ready to" heading="Join MULC?"><p>{site.joinBlurb} {site.membershipFee}</p></Title>
+        <div class="join-cta">
+          <CampusLabsButton class="btn btn-cream" />
+          <a class="join-steps" href={url('join/')}>See steps and requirements</a>
+        </div>
       </div>
     </div>
   </section>
@@ -160,6 +188,7 @@ const x = '<path d="M6 6l12 12M18 6L6 18"></path>';
           <a class="btn btn-primary" id="ev-rsvp" target="_blank" rel="noopener">RSVP</a>
           <a class="btn btn-outline-dk" id="ev-cal" target="_blank" rel="noopener">Add to calendar</a>
         </div>
+        <p class="note" id="ev-rsvp-note">RSVP opens in a new tab.</p>
       </div>
     </div></div>
   </dialog>
