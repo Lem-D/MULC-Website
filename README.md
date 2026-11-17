@@ -19,12 +19,13 @@ npm run preview  # preview the production build
 
 | Path | What it is |
 |---|---|
-| `src/content/*.json` | All the text: events, execs, FAQ, sponsors, albums, club info. **Edit these to update the site.** |
+| `src/content/*.json` | All the text: events, execs, FAQ, sponsors, partners, join steps, club documents, albums, club info. **Edit these to update the site.** |
+| `public/docs/` | The constitution PDFs (and the sponsorship package once it exists) |
 | `public/images/` | Logo, headshots, event posters and album photos |
-| `src/pages/` | The three pages: Home (`index.astro`), About Us, FAQ |
+| `src/pages/` | The pages: Home (`index.astro`), About Us, Partner with us, Join, FAQ |
 | `src/components/` | Header, footer and shared pieces |
 | `src/styles/global.css` | Colours, fonts and layout (brand colours are at the top) |
-| `src/scripts/site.js` | Mobile menu, events carousel and popups |
+| `src/scripts/site.js` | Mobile menu, events carousel, popups and the partner inquiry form |
 | `prototype/` | The original clickable prototype, kept for reference |
 
 See `CONTRIBUTING.md` for step-by-step content updates.
