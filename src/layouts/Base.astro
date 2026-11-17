@@ -4,8 +4,20 @@ import site from '../content/site.json';
 import { url } from '../lib/url.js';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-const { title, current, description = site.description } = Astro.props;
+// Each page can pass its own link-preview text and image, so a link pasted into an
+// email, LinkedIn post or chat shows a card that fits that page.
+const {
+  title,
+  current,
+  description = site.description,
+  shareTitle,
+  shareImage = 'images/share/home.png',
+  shareImageAlt = `${site.name} logo with the words "Welcome to MacEwan Law Club"`,
+} = Astro.props;
 const fullTitle = title ? `${title} | ${site.name}` : site.name;
+const abs = (path) => new URL(path, Astro.site ?? Astro.url).href;
+const pageUrl = abs(Astro.url.pathname);
+const ogTitle = shareTitle ?? fullTitle;
 ---
 <!doctype html>
 <html lang="en">
@@ -14,9 +26,21 @@ const fullTitle = title ? `${title} | ${site.name}` : site.name;
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>{fullTitle}</title>
   <meta name="description" content={description}>
-  <meta property="og:title" content={fullTitle}>
+  <link rel="canonical" href={pageUrl}>
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content={site.name}>
+  <meta property="og:url" content={pageUrl}>
+  <meta property="og:title" content={ogTitle}>
   <meta property="og:description" content={description}>
-  <meta property="og:image" content={new URL(url('images/mulc-logo.jpg'), Astro.site ?? Astro.url).href}>
+  <meta property="og:image" content={abs(url(shareImage))}>
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content={shareImageAlt}>
+  <meta property="og:locale" content="en_CA">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content={ogTitle}>
+  <meta name="twitter:description" content={description}>
+  <meta name="twitter:image" content={abs(url(shareImage))}>
   <meta name="theme-color" content="#1A1214">
   <link rel="icon" href={url('images/mulc-logo.jpg')}>
   <script is:inline>
