@@ -1,0 +1,10 @@
+---
+import site from '../content/site.json';
+// Opens MULC's Campus Labs page once `campusLabsUrl` is set in site.json.
+// Until then it shows as a disabled "coming soon" button.
+const { class: className = 'btn btn-primary' } = Astro.props;
+const arrow = '<path d="M7 17L17 7M9 7h8v8"></path>';
+---
+{site.campusLabsUrl
+  ? <a class={className} href={site.campusLabsUrl} target="_blank" rel="noopener"><slot>Join on Campus Labs</slot><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" set:html={arrow}></svg></a>
+  : <span class:list={[className, 'nolink', 'soon']}>Campus Labs link coming soon</span>}

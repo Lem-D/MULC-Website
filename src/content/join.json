@@ -1,0 +1,15 @@
+{
+  "intro": "Membership is handled on Campus Labs, MacEwan's official club portal. Here's exactly what to do, so you're not left guessing once you get there.",
+  "steps": [
+    { "title": "Open MULC on Campus Labs", "body": "Use the button on this page. It goes straight to our club page." },
+    { "title": "Sign in with your MacEwan account", "body": "The same login you use for myMacEwan and Moodle." },
+    { "title": "Press \"Join\" and answer the short form", "body": "[Program, year, and what you're hoping to get from MULC.]" },
+    { "title": "Watch for your welcome email", "body": "An exec approves new members within [3 days]. You'll then get event invites and RSVP links." }
+  ],
+  "requirements": [
+    "A MacEwan student taking at least one course this term (full-time, part-time or distance)",
+    "Request to join on Campus Labs and get approved by an exec",
+    "No law or pre-law background needed"
+  ],
+  "requirementsNote": "Students from other schools can join events when invited by the execs."
+}

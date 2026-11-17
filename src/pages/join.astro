@@ -1,0 +1,52 @@
+---
+import Base from '../layouts/Base.astro';
+import CampusLabsButton from '../components/CampusLabsButton.astro';
+import MaybeLink from '../components/MaybeLink.astro';
+import site from '../content/site.json';
+import join from '../content/join.json';
+import { url } from '../lib/url.js';
+
+const hasEmail = site.email.includes('@');
+const check = '<path d="M5 12l5 5 9-10"></path>';
+// Requirements come from Article III of the constitution, plus the fee from site.json.
+const requirements = [...join.requirements.slice(0, 2), site.membershipFee, ...join.requirements.slice(2)].filter(Boolean);
+---
+<Base title="Join MULC" current="join" description="How to join the MacEwan Law Club on Campus Labs: four steps and who can become a member.">
+  <section class="j-head">
+    <div class="wrap">
+      <div class="lock flow_in_left">
+        <span class="s">How to</span>
+        <h1 class="d">Join MULC</h1>
+      </div>
+      <p class="lede flow_in_left" style="--d:.12s">{join.intro}</p>
+    </div>
+  </section>
+
+  <section class="j-body">
+    <div class="wrap">
+      <ol class="steps" aria-label="Steps">
+        {join.steps.map((s, i) => (
+          <li class="flow_in_up" style={`--d:${(i * 0.1).toFixed(2)}s`}>
+            <span class="n" aria-hidden="true">{i + 1}</span>
+            <div><h2>{s.title}</h2><p>{s.body}</p></div>
+          </li>
+        ))}
+      </ol>
+
+      <div class="j-side">
+        <div class="req flow_in_up" style="--d:.15s">
+          <h2>Requirements</h2>
+          <ul>
+            {requirements.map((r) => <li><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#991A2D" stroke-width="2" stroke-linecap="round" set:html={check}></svg><span>{r}</span></li>)}
+          </ul>
+          <p class="note">From Article III of the <a href={url('faq/#documents')}>club constitution</a>. {join.requirementsNote}</p>
+          <CampusLabsButton>Open MULC on Campus Labs</CampusLabsButton>
+          {site.campusLabsUrl && <span class="note opens">Opens {site.campusLabsUrl.replace(/^https?:\/\//, '')}</span>}
+        </div>
+        <div class="stuck flow_in_up" style="--d:.25s">
+          Stuck? Read <a href={url('faq/')}>the FAQ</a> or email {hasEmail ? <a href={`mailto:${site.email}`}>{site.email}</a> : <MaybeLink href="">{site.email}</MaybeLink>} and we'll help you get set up.
+        </div>
+      </div>
+    </div>
+  </section>
+</Base>
