@@ -1,0 +1,15 @@
+{
+  "intro": "The official documents that govern how MULC runs. Open to members, partners and anyone curious.",
+  "current": {
+    "title": "MULC Constitution 2025–2026",
+    "file": "docs/constitution/MULC-Constitution-2025-2026.pdf",
+    "details": "PDF · 10 pages · Signed November 10, 2025"
+  },
+  "past": [
+    { "label": "2024–2025", "file": "docs/constitution/past/MULC-Constitution-2024-2025.pdf" },
+    { "label": "2024", "file": "docs/constitution/past/MULC-Constitution-2024.pdf" },
+    { "label": "September 2022", "file": "docs/constitution/past/MULC-Constitution-2022-09.pdf" },
+    { "label": "June 2022", "file": "docs/constitution/past/MULC-Constitution-2022-06.pdf" },
+    { "label": "Original constitution", "file": "docs/constitution/past/MULC-Constitution-original.pdf" }
+  ]
+}
