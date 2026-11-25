@@ -72,6 +72,7 @@ Edit `src/content/site.json`:
 - `heroImage`: the team photo at the top of the Home page (landscape). On computers it sits on the right and fades into the dark behind the text; on tablets and phones it is a band above the text. Put it in `public/images/hero/` and set e.g. `"images/hero/team.jpg"`.
 - `heroImageWidths`: optional. If you list widths like `[960, 1440, 1920]`, the page loads resized copies named `team-960.jpg` + `team-960.webp` and so on (they must all exist), so phones download a small file. Leave it out or `[]` to use the single file as is.
 - `heroImagePhone` / `heroImagePhoneWidths`: optional taller crop used on phones (under 761px wide), same naming rules. Crop it so everyone is in frame with a little space around them. Leave `heroImagePhone` as `""` to use the landscape photo on phones too.
+- `standForImage`: the photo that shows through the "What we stand for" panel on Home (it stays still while the page scrolls). Put it in `public/images/standfor/`. Use the biggest version you have (1600px wide or more); small photos look soft. Leave it `""` to reuse the hero photo.
 - When swapping in a new photo, check the Home page at phone, tablet and laptop widths to make sure nobody sits behind the text.
 
 ## FAQ and club documents

@@ -50,17 +50,18 @@ const picture = (path, widths = []) => {
 };
 const hero = picture(site.heroImage, site.heroImageWidths);
 const heroPhone = picture(site.heroImagePhone, site.heroImagePhoneWidths);
+// Photo inside the "What we stand for" panel, sized to the panel. Falls back to the hero photo.
+// A "backgroundVideo" replaces it with a full-screen video that shows through the panel.
+const standImage = site.standForImage ? asset(site.standForImage) : hero?.src;
 const phoneMedia = '(max-width: 760px)';
 const heroSizes = '(max-width: 1199px) 100vw, 60vw';
 const x = '<path d="M6 6l12 12M18 6L6 18"></path>';
 ---
 <Base current="home">
   <!-- Fixed background that the page scrolls over. It shows through the "What we Stand For" panel. -->
-  <div class="page-bg" aria-hidden="true">
-    {site.backgroundVideo
-      ? <video src={asset(site.backgroundVideo)} poster={asset(site.backgroundPoster) || undefined} autoplay muted loop playsinline preload="metadata"></video>
-      : hero && <img src={hero.src} alt="">}
-  </div>
+  {site.backgroundVideo && <div class="page-bg" aria-hidden="true">
+    <video src={asset(site.backgroundVideo)} poster={asset(site.backgroundPoster) || undefined} autoplay muted loop playsinline preload="metadata"></video>
+  </div>}
   <section class:list={['hero', { 'has-photo': hero }]} id="top">
     <div class="hero-main">
       <div class="hero-bg" aria-hidden="true">
@@ -117,8 +118,8 @@ const x = '<path d="M6 6l12 12M18 6L6 18"></path>';
 
   <section id="standfor">
     <div class="wrap">
-      <div class="stand">
-        <span class="ph">{site.backgroundVideo ? '' : '[Background video shows through here]'}</span>
+      <div class:list={['stand', { 'has-photo': standImage && !site.backgroundVideo }]} style={standImage && !site.backgroundVideo ? `--stand-img:url('${standImage}')` : undefined}>
+        {!site.backgroundVideo && !standImage && <span class="ph">[Background photo shows through here]</span>}
         <div class="stand-in">
           <Title script="What we" heading="Stand For">
             <p class="intro">{site.standFor.intro}</p>
