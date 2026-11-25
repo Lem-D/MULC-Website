@@ -69,7 +69,10 @@ Edit `src/content/site.json`:
 
 - `email`, `socials` and `location.mapsUrl`: links only appear once a URL is filled in.
 - `stats`, `standFor`, `mission` and `history`: the text on Home and About Us.
-- `heroImage`: the team photo behind the top of the Home page. Put it in `public/images/` (landscape, about 1600px wide) and set e.g. `"images/team.jpg"`. A dark overlay is added automatically so the text stays readable.
+- `heroImage`: the team photo at the top of the Home page (landscape). On computers it sits on the right and fades into the dark behind the text; on tablets and phones it is a band above the text. Put it in `public/images/hero/` and set e.g. `"images/hero/team.jpg"`.
+- `heroImageWidths`: optional. If you list widths like `[960, 1440, 1920]`, the page loads resized copies named `team-960.jpg` + `team-960.webp` and so on (they must all exist), so phones download a small file. Leave it out or `[]` to use the single file as is.
+- `heroImagePhone` / `heroImagePhoneWidths`: optional taller crop used on phones (under 761px wide), same naming rules. Crop it so everyone is in frame with a little space around them. Leave `heroImagePhone` as `""` to use the landscape photo on phones too.
+- When swapping in a new photo, check the Home page at phone, tablet and laptop widths to make sure nobody sits behind the text.
 
 ## FAQ and club documents
 

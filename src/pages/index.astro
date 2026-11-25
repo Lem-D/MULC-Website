@@ -37,6 +37,21 @@ const eventData = events.map((e) => ({
   locationText: e.location || 'Location to be announced',
 }));
 const albumData = albums.map((a) => ({ ...a, photos: a.photos.map(asset) }));
+// Team photo behind the hero. "heroImage" is the wide photo for computers and tablets,
+// "heroImagePhone" an optional taller crop for phones. With the "...Widths" lists, the page loads
+// resized copies named e.g. exec-2026-27-960.jpg and exec-2026-27-960.webp, so phones get a small file.
+const picture = (path, widths = []) => {
+  if (!path) return null;
+  if (!widths.length) return { src: asset(path) };
+  const [, stem, ext] = path.match(/^(.*)(\.\w+)$/);
+  const at = (w, e) => asset(`${stem}-${w}${e}`);
+  const list = (e) => widths.map((w) => `${at(w, e)} ${w}w`).join(', ');
+  return { src: at(widths.at(-1), ext), srcset: list(ext), webp: list('.webp') };
+};
+const hero = picture(site.heroImage, site.heroImageWidths);
+const heroPhone = picture(site.heroImagePhone, site.heroImagePhoneWidths);
+const phoneMedia = '(max-width: 760px)';
+const heroSizes = '(max-width: 1199px) 100vw, 60vw';
 const x = '<path d="M6 6l12 12M18 6L6 18"></path>';
 ---
 <Base current="home">
@@ -44,26 +59,37 @@ const x = '<path d="M6 6l12 12M18 6L6 18"></path>';
   <div class="page-bg" aria-hidden="true">
     {site.backgroundVideo
       ? <video src={asset(site.backgroundVideo)} poster={asset(site.backgroundPoster) || undefined} autoplay muted loop playsinline preload="metadata"></video>
-      : site.heroImage && <img src={asset(site.heroImage)} alt="">}
+      : hero && <img src={hero.src} alt="">}
   </div>
-  <section class="hero" id="top" style={site.heroImage ? `--hero-img:url('${asset(site.heroImage)}')` : undefined}>
-    <div class="hero-bg" aria-hidden="true">
-      {!site.heroImage && <span class="ph">[Team photo background]</span>}
-    </div>
-    <div class="wrap">
-      <div class="hero-copy">
-        <div class="flow_in_left">
-          <div class="welcome">Welcome to</div>
-          <h1>MacEwan<br>Law Club</h1>
-        </div>
-        <div class="dbl flow_in_left" style="--d:.12s"></div>
-        <p class="tag flow_in_left" style="--d:.12s">{site.tagline}</p>
-        <p class="lede flow_in_left" style="--d:.24s">{site.intro}</p>
-        <div class="row flow_in_left" style="--d:.36s">
-          <JoinButton />
-          <a class="btn btn-ghost" href="#events">Upcoming events</a>
+  <section class:list={['hero', { 'has-photo': hero }]} id="top">
+    <div class="hero-main">
+      <div class="hero-bg" aria-hidden="true">
+        {hero
+          ? <picture>
+              {heroPhone?.webp && <source media={phoneMedia} type="image/webp" srcset={heroPhone.webp} sizes="100vw" />}
+              {heroPhone && <source media={phoneMedia} srcset={heroPhone.srcset || heroPhone.src} sizes="100vw" />}
+              {hero.webp && <source type="image/webp" srcset={hero.webp} sizes={heroSizes} />}
+              <img src={hero.src} srcset={hero.srcset} sizes={heroSizes} alt="" fetchpriority="high" />
+            </picture>
+          : <span class="ph">[Team photo background]</span>}
+      </div>
+      <div class="wrap">
+        <div class="hero-copy">
+          <div class="flow_in_left">
+            <div class="welcome">Welcome to</div>
+            <h1>MacEwan<br>Law Club</h1>
+          </div>
+          <div class="dbl flow_in_left" style="--d:.12s"></div>
+          <p class="tag flow_in_left" style="--d:.12s">{site.tagline}</p>
+          <p class="lede flow_in_left" style="--d:.24s">{site.intro}</p>
+          <div class="row flow_in_left" style="--d:.36s">
+            <JoinButton />
+            <a class="btn btn-ghost" href="#events">Upcoming events</a>
+          </div>
         </div>
       </div>
+    </div>
+    <div class="wrap">
       <div class="stats">
         {site.stats.map((s, i) => <div class="stat flow_in_up" style={step(i, 4)}><b>{s.value}</b><span>{s.label}</span></div>)}
       </div>
