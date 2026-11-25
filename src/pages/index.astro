@@ -82,7 +82,7 @@ const x = '<path d="M6 6l12 12M18 6L6 18"></path>';
       <div class="sp-grid">
         {sponsors.map((s, i) => (
           <MaybeLink href={s.url} class="sp flow_in_up" style={step(i, 5)}>
-            {s.logo ? <img src={asset(s.logo)} alt={s.name} style="max-height:70px;max-width:80%;object-fit:contain"> : s.name}
+            {s.logo ? <img src={asset(s.logo)} alt={s.name} loading="lazy" decoding="async" style="max-height:70px;max-width:80%;object-fit:contain"> : s.name}
           </MaybeLink>
         ))}
       </div>
@@ -115,11 +115,11 @@ const x = '<path d="M6 6l12 12M18 6L6 18"></path>';
           <button class="arrow" id="nextEv" aria-label="Next events"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"></path></svg></button>
         </div>
       </div>
-      <div class="track" id="track" tabindex="0" aria-label="Upcoming events, scroll sideways">
+      <div class="track" id="track" tabindex="0" role="region" aria-label="Upcoming events, scroll sideways">
         {eventData.map((e, i) => (
           <article class="ecard flow_in_up" style={step(i, 3)}>
             <div class="ecard-photo">
-              {e.image ? <img src={e.image} alt="" loading="lazy"> : <span class="ph">{e.dateTbd ? '[Event photo or past-year photo]' : '[Event photo]'}</span>}
+              {e.image ? <img src={e.image} alt="" width="600" height="190" loading="lazy" decoding="async"> : <span class="ph">{e.dateTbd ? '[Event photo or past-year photo]' : '[Event photo]'}</span>}
               {e.dateTbd
                 ? <div class="date-disc tbd" aria-label="Date to be announced">TBD</div>
                 : <div class="date-disc"><small>{e.month}</small><b>{e.day}</b></div>}
@@ -145,7 +145,7 @@ const x = '<path d="M6 6l12 12M18 6L6 18"></path>';
       <div style="margin-bottom:40px">
         <Title script="Previous" heading="Events"><p class="sub">Tap an event to see its photos.</p></Title>
       </div>
-      <div class="albums">
+      <div class="albums" id="albums">
         {albums.map((a, i) => (
           <button class="album flow_in_up" style={step(i, 3)} data-album={i}>
             <span class="cover" style={a.cover ? `background:url('${asset(a.cover)}') center/cover` : undefined}>
@@ -155,6 +155,7 @@ const x = '<path d="M6 6l12 12M18 6L6 18"></path>';
           </button>
         ))}
       </div>
+      <button class="btn btn-ghost btn-sm albums-more" id="albumsMore" aria-controls="albums" hidden>See all past events</button>
     </div>
   </section>
 
@@ -174,7 +175,7 @@ const x = '<path d="M6 6l12 12M18 6L6 18"></path>';
   <dialog id="dlg-event" aria-labelledby="ev-title">
     <div class="dlg"><div class="dlg-in">
       <div class="dlg-hero" id="ev-hero"><span class="ph">[Event poster or photo]</span>
-        <button class="x" data-close aria-label="Close"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" set:html={x}></svg></button>
+        <button class="x" data-close aria-label="Close" autofocus><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" set:html={x}></svg></button>
       </div>
       <div class="dlg-body">
         <div><div class="s">Upcoming event</div><h2 id="ev-title"></h2></div>
@@ -197,7 +198,7 @@ const x = '<path d="M6 6l12 12M18 6L6 18"></path>';
   <dialog id="dlg-album" aria-labelledby="al-title">
     <div class="dlg"><div class="dlg-in">
       <div class="dlg-body" style="position:relative">
-        <button class="x" data-close aria-label="Close"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" set:html={x}></svg></button>
+        <button class="x" data-close aria-label="Close" autofocus><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" set:html={x}></svg></button>
         <div><div class="s">Photo album</div><h2 id="al-title"></h2><p class="note" id="al-date" style="margin-top:6px"></p></div>
         <div class="photos" id="photos"></div>
         <a class="btn btn-outline-dk" id="al-more" target="_blank" rel="noopener" style="align-self:flex-start">See the full album</a>

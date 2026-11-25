@@ -111,7 +111,7 @@ const down = '<path d="M12 4v12M6 11l6 6 6-6M5 20h14"></path>';
       <div class="sp-grid">
         {sponsors.map((s, i) => (
           <MaybeLink href={s.url} class="sp flow_in_up" style={step(i, 5)}>
-            {s.logo ? <img src={asset(s.logo)} alt={s.name} style="max-height:70px;max-width:80%;object-fit:contain"> : s.name}
+            {s.logo ? <img src={asset(s.logo)} alt={s.name} loading="lazy" decoding="async" style="max-height:70px;max-width:80%;object-fit:contain"> : s.name}
           </MaybeLink>
         ))}
       </div>
@@ -121,7 +121,7 @@ const down = '<path d="M12 4v12M6 11l6 6 6-6M5 20h14"></path>';
   <!-- Partner inquiry popup. Opens from any [data-inquiry] button; src/scripts/site.js sets the topic. -->
   <dialog id="dlg-inquiry" class="dlg-dark" aria-labelledby="inq-h">
     <div class="inq">
-      <button class="x" data-close aria-label="Close"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" set:html={x}></svg></button>
+      <button class="x" data-close aria-label="Close" autofocus><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" set:html={x}></svg></button>
       <div>
         <h2 id="inq-h">Partner with MULC</h2>
         <p class="inq-sub">Tell us a bit about your firm and what you have in mind.</p>

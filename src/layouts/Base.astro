@@ -13,6 +13,7 @@ const {
   shareTitle,
   shareImage = 'images/share/home.png',
   shareImageAlt = `${site.name} logo with the words "Welcome to MacEwan Law Club"`,
+  noindex = false,
 } = Astro.props;
 const fullTitle = title ? `${title} | ${site.name}` : site.name;
 const abs = (path) => new URL(path, Astro.site ?? Astro.url).href;
@@ -26,7 +27,7 @@ const ogTitle = shareTitle ?? fullTitle;
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>{fullTitle}</title>
   <meta name="description" content={description}>
-  <link rel="canonical" href={pageUrl}>
+  {noindex ? <meta name="robots" content="noindex"> : <link rel="canonical" href={pageUrl}>}
   <meta property="og:type" content="website">
   <meta property="og:site_name" content={site.name}>
   <meta property="og:url" content={pageUrl}>
@@ -42,7 +43,11 @@ const ogTitle = shareTitle ?? fullTitle;
   <meta name="twitter:description" content={description}>
   <meta name="twitter:image" content={abs(url(shareImage))}>
   <meta name="theme-color" content="#1A1214">
-  <link rel="icon" href={url('images/mulc-logo.jpg')}>
+  <link rel="icon" href={url('favicon.ico')} sizes="48x48">
+  <link rel="icon" href={url('favicon-32.png')} type="image/png" sizes="32x32">
+  <link rel="apple-touch-icon" href={url('apple-touch-icon.png')}>
+  <link rel="manifest" href={url('site.webmanifest')}>
+  <link rel="sitemap" type="application/xml" href={url('sitemap.xml')}>
   <script is:inline>
     // Scroll reveals start hidden only when JavaScript runs and the visitor hasn't asked for reduced motion.
     // If site.js never loads, everything is shown after 4 seconds.

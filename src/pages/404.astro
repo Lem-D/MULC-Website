@@ -1,0 +1,30 @@
+---
+import Base from '../layouts/Base.astro';
+import JoinButton from '../components/JoinButton.astro';
+import { url } from '../lib/url.js';
+// GitHub Pages shows this page for any address on the site that doesn't exist.
+// Every link uses url() so it still works under the /MULC-Website/ sub-path.
+---
+<Base title="Page not found" noindex description="This page couldn't be found on the MacEwan Law Club website.">
+  <section class="nf">
+    <div class="wrap">
+      <div class="code" aria-hidden="true">404</div>
+      <div class="lock center">
+        <span class="s">Case</span>
+        <h1 class="d">Not Found</h1>
+      </div>
+      <div class="dbl"></div>
+      <p class="lede">We searched the record and this page isn't in it. It may have moved, or the link may have a typo.</p>
+      <div class="row">
+        <a class="btn btn-primary" href={url('')}>Back to the home page</a>
+        <JoinButton class="btn btn-ghost" />
+      </div>
+      <nav class="nf-links" aria-label="Popular pages">
+        <a href={url('#events')}>Upcoming events</a>
+        <a href={url('about/')}>About us</a>
+        <a href={url('partners/')}>Partner with us</a>
+        <a href={url('faq/')}>FAQ</a>
+      </nav>
+    </div>
+  </section>
+</Base>

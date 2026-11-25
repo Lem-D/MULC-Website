@@ -24,8 +24,12 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-      - run: npm install
+          cache: npm
+      - run: npm ci
       - run: npm run build
+      # Stops the deploy if any link inside the site is broken, so the live site keeps its last good version.
+      - name: Check internal links
+        run: npm run check:links
       - uses: actions/upload-pages-artifact@v3
         with:
           path: dist

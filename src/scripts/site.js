@@ -10,7 +10,17 @@ menuBtn?.addEventListener('click', () => {
   menuBtn.setAttribute('aria-expanded', String(open));
   menuBtn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
 });
-$$('a', nav).forEach((a) => a.addEventListener('click', () => nav.classList.remove('open')));
+const closeMenu = (focusBtn) => {
+  if (!nav?.classList.contains('open')) return;
+  nav.classList.remove('open');
+  menuBtn.setAttribute('aria-expanded', 'false');
+  menuBtn.setAttribute('aria-label', 'Open menu');
+  if (focusBtn) menuBtn.focus();
+};
+if (nav) $$('a', nav).forEach((a) => a.addEventListener('click', () => closeMenu(false)));
+// Escape or a tap outside the header closes the menu.
+document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeMenu(true); });
+document.addEventListener('click', (e) => { if (!e.target.closest('header.site')) closeMenu(false); });
 
 // ----- Upcoming events carousel -----
 const track = $('#track');
@@ -42,6 +52,19 @@ if (track) {
   track.addEventListener('scroll', () => requestAnimationFrame(sync), { passive: true });
   window.addEventListener('resize', buildDots);
   buildDots();
+}
+
+// ----- Previous events: phones show three albums until "See all past events" is tapped -----
+const albumGrid = $('#albums');
+const albumsMore = $('#albumsMore');
+if (albumGrid && albumsMore && $$('.album', albumGrid).length > 3) {
+  albumGrid.classList.add('collapsed');
+  albumsMore.hidden = false;
+  albumsMore.addEventListener('click', () => {
+    albumGrid.classList.remove('collapsed');
+    albumsMore.hidden = true;
+    $$('.album', albumGrid)[3]?.focus();
+  });
 }
 
 // ----- Popups (event details, photo albums) -----

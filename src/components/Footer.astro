@@ -8,19 +8,19 @@ const hasEmail = site.email.includes('@');
 <footer class="site" id="contact">
   <div class="wrap">
     <div class="f-grid">
-      <div class="f-col"><img src={url('images/mulc-logo.jpg')} alt="MULC logo" width="72" height="72"><span class="nm">{site.name}</span></div>
-      <div class="f-col">
-        <h3>Location</h3>
+      <div class="f-col f-brand"><img src={url('images/mulc-logo.jpg')} alt="" width="72" height="72" loading="lazy" decoding="async"><span class="nm">{site.name}</span></div>
+      <div class="f-col f-loc">
+        <h2>Location</h2>
         <address>{site.location.lines.map((line, i) => <>{i > 0 && <br />}{line}</>)}</address>
         {site.location.mapsUrl && <a href={site.location.mapsUrl} target="_blank" rel="noopener" style="color:var(--rose)">Open in Maps</a>}
       </div>
       <div class="f-col">
-        <h3>Socials</h3>
+        <h2>Socials</h2>
         {site.socials.map((s) => <MaybeLink href={s.url}>{s.label}</MaybeLink>)}
         <MaybeLink href={hasEmail ? `mailto:${site.email}` : ''}>{site.email}</MaybeLink>
       </div>
       <div class="f-col">
-        <h3>Menu</h3>
+        <h2>Menu</h2>
         <a href={url('')}>Home</a>
         <a href={url('about/')}>About Us</a>
         <a href={url('partners/')}>Partner with us</a>

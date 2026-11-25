@@ -1,8 +1,10 @@
 # Updating the MULC website
 
+New to this? Read **`EDITING-GUIDE.md`** first. It walks through updating events, partners and the FAQ on github.com, step by step. This page is the full reference for every field.
+
 Everything on the site comes from the files in `src/content/`. You don't need to touch any code to update it. Anything in `[brackets]` is a placeholder waiting for real content.
 
-After editing, run `npm run dev` to check it, then commit and push to `main`. The site updates itself within a few minutes.
+After editing, run `npm run dev` to check it (and `npm run check` to catch broken links), then commit and push to `main`. The site updates itself within a few minutes. If GitHub's build fails (a red X under **Actions**), the live site stays as it was until the error is fixed.
 
 ## Add or change an event
 
