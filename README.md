@@ -27,9 +27,14 @@ npm run check    # build, then check every link and image inside the site
 | `scripts/check-links.mjs` | The link checker used by `npm run check` and GitHub Actions |
 | `src/pages/` | The pages: Home (`index.astro`), About Us, Partner with us, Join, FAQ, the 404 page, plus `sitemap.xml`, `robots.txt` and `site.webmanifest`, which are generated from code |
 | `src/components/` | Header, footer and shared pieces |
+| `src/layouts/Base.astro` | The page shell every page uses: `<head>`, link previews, header, footer |
+| `src/lib/` | Helpers: `url.js` (links that respect the base path) and `stats.js` (numbers from `stats.json`) |
 | `src/styles/global.css` | Colours, fonts and layout (brand colours are at the top) |
 | `src/scripts/site.js` | Mobile menu, events carousel, popups and the partner inquiry form |
 | `prototype/` | The original clickable prototype, kept for reference |
+| `astro.config.mjs` | The site's public address (`site`) and sub-path (`base`) |
+
+Every source file starts with a short comment saying what it does and which content files feed it, and `global.css` and `site.js` open with a list of their sections. Start there when changing code.
 
 Execs updating events, partners or the FAQ: start with **`EDITING-GUIDE.md`**, a plain-language walkthrough for editing on github.com. `CONTRIBUTING.md` documents every content field.
 

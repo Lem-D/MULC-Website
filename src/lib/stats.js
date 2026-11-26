@@ -1,3 +1,4 @@
+// Stats helpers, used by the Home and Partner with us pages.
 // All club numbers live in src/content/stats.json, so each one is typed once.
 import stats from '../content/stats.json';
 

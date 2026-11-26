@@ -1,3 +1,4 @@
+// Generated file: /sitemap.xml (a .js file in src/pages/ becomes a file at that address).
 // Builds /sitemap.xml from the pages in this folder, so a new page is listed automatically.
 // The 404 page and these generated files are left out.
 const pages = Object.keys(import.meta.glob('./*.astro'))

@@ -1,8 +1,12 @@
 ---
+// Site footer, on every page: logo, address, social links, club email and the page menu.
+// Everything comes from site.json (footerLogo, location, socials, email). id="contact" lets
+// other pages link to "#contact".
 import site from '../content/site.json';
 import { url } from '../lib/url.js';
 import MaybeLink from './MaybeLink.astro';
 const year = new Date().getFullYear();
+// A placeholder like "[club email]" has no @, so it shows as plain text instead of a broken mailto link.
 const hasEmail = site.email.includes('@');
 ---
 <footer class="site" id="contact">

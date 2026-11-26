@@ -1,3 +1,4 @@
+// Generated file: /site.webmanifest (a .js file in src/pages/ becomes a file at that address).
 // The web app manifest: the name and icon used when someone adds the site to their phone's home screen.
 import site from '../content/site.json';
 

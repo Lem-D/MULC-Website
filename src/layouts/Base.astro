@@ -1,4 +1,13 @@
 ---
+// Base layout: the <html> shell every page is wrapped in. It adds the <head> (title, description,
+// link-preview tags, icons, fonts), the header and footer, and loads global.css and site.js.
+//
+// Props a page can pass:
+//   title          page name, shown as "Title | MacEwan Law Club" (leave out on Home)
+//   current        menu id to highlight in the header ("home", "about", "partners", "faq", "join")
+//   description    search/link-preview text (defaults to site.json `description`)
+//   shareTitle, shareImage, shareImageAlt   link-preview overrides (image is a 1200x630 file in public/)
+//   noindex        true keeps the page out of search engines (used by the 404 page)
 import '../styles/global.css';
 import site from '../content/site.json';
 import { url } from '../lib/url.js';
@@ -16,6 +25,7 @@ const {
   noindex = false,
 } = Astro.props;
 const fullTitle = title ? `${title} | ${site.name}` : site.name;
+// Full https:// address for a path; link previews need absolute URLs.
 const abs = (path) => new URL(path, Astro.site ?? Astro.url).href;
 const pageUrl = abs(Astro.url.pathname);
 const ogTitle = shareTitle ?? fullTitle;
@@ -67,6 +77,7 @@ const ogTitle = shareTitle ?? fullTitle;
     <slot />
   </main>
   <Footer />
+  {/* Astro bundles and minifies site.js and loads it as a module, after the page has been parsed. */}
   <script>
     import '../scripts/site.js';
   </script>

@@ -1,4 +1,10 @@
 ---
+// Home page (/). Sections, top to bottom: hero + stats, Our Partners, What we Stand For,
+// Upcoming Events carousel, Previous Events albums, Join band, plus the event and album popups.
+//
+// Content: site.json (hero, tagline, intro, standFor, joinBlurb), stats.json (via statsFor),
+// events.json, sponsors.json, albums.json. The popups, carousel and "See all past events" button
+// are driven by src/scripts/site.js, which reads the two JSON blocks at the bottom of this page.
 import Base from '../layouts/Base.astro';
 import Title from '../components/Title.astro';
 import JoinButton from '../components/JoinButton.astro';
@@ -28,6 +34,7 @@ const calendarUrl = (e) =>
 // Every event shows an RSVP button. Without its own "rsvpUrl" it opens the club's events
 // on Campus Labs. Events marked "dateTbd" show a TBD disc, a "Coming soon" label and no calendar button.
 const rsvpFallback = site.campusLabsUrl ? `${site.campusLabsUrl.replace(/\/$/, '')}/events` : '';
+// eventData is what both the cards and the popup use, with every fallback already applied.
 const eventData = events.map((e) => ({
   ...e,
   image: asset(e.image),
@@ -37,10 +44,12 @@ const eventData = events.map((e) => ({
   timeText: e.dateTbd ? e.timeLabel || 'To be announced' : e.timeLabel,
   locationText: e.location || 'Location to be announced',
 }));
+// Album photo paths turned into real URLs for the popup.
 const albumData = albums.map((a) => ({ ...a, photos: a.photos.map(asset) }));
 // Team photo behind the hero. "heroImage" is the wide photo for computers and tablets,
 // "heroImagePhone" an optional taller crop for phones. With the "...Widths" lists, the page loads
 // resized copies named e.g. exec-2026-27-960.jpg and exec-2026-27-960.webp, so phones get a small file.
+// Returns { src, srcset, webp } for a <picture>, or null when no photo is set.
 const picture = (path, widths = []) => {
   if (!path) return null;
   if (!widths.length) return { src: asset(path) };
@@ -54,8 +63,11 @@ const heroPhone = picture(site.heroImagePhone, site.heroImagePhoneWidths);
 // Photo inside the "What we stand for" panel, sized to the panel. Falls back to the hero photo.
 // A "backgroundVideo" replaces it with a full-screen video that shows through the panel.
 const standImage = site.standForImage ? asset(site.standForImage) : hero?.src;
+// Must match the phone breakpoint for the hero in global.css.
 const phoneMedia = '(max-width: 760px)';
+// Below 1200px the photo spans the full width; above it, the photo sits in about 60% on the right.
 const heroSizes = '(max-width: 1199px) 100vw, 60vw';
+// Close (X) icon used by both popups.
 const x = '<path d="M6 6l12 12M18 6L6 18"></path>';
 ---
 <Base current="home">
@@ -107,6 +119,7 @@ const x = '<path d="M6 6l12 12M18 6L6 18"></path>';
         </div>
         <a class="btn btn-ghost btn-sm fade_in" style="--d:.2s" href={url('partners/')}>Partner with us<svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" set:html={'<path d="M5 12h14M13 6l6 6-6 6"></path>'}></svg></a>
       </div>
+      {/* One tile per entry in sponsors.json; a tile links to the partner's site when "url" is set. */}
       <div class="sp-grid">
         {sponsors.map((s, i) => (
           <MaybeLink href={s.url} class="sp flow_in_up" style={step(i, 5)}>
@@ -119,6 +132,7 @@ const x = '<path d="M6 6l12 12M18 6L6 18"></path>';
 
   <section id="standfor">
     <div class="wrap">
+      {/* With a photo, it is passed to CSS as --stand-img. With backgroundVideo, the panel is see-through instead. */}
       <div class:list={['stand', { 'has-photo': standImage && !site.backgroundVideo }]} style={standImage && !site.backgroundVideo ? `--stand-img:url('${standImage}')` : undefined}>
         {!site.backgroundVideo && !standImage && <span class="ph">[Background photo shows through here]</span>}
         <div class="stand-in">
@@ -143,6 +157,7 @@ const x = '<path d="M6 6l12 12M18 6L6 18"></path>';
           <button class="arrow" id="nextEv" aria-label="Next events"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"></path></svg></button>
         </div>
       </div>
+      {/* Horizontal scroll strip. Arrows and dots (#dots, built by site.js) scroll it; touch and trackpads scroll it directly. */}
       <div class="track" id="track" tabindex="0" role="region" aria-label="Upcoming events, scroll sideways">
         {eventData.map((e, i) => (
           <article class="ecard flow_in_up" style={step(i, 3)}>
@@ -158,6 +173,7 @@ const x = '<path d="M6 6l12 12M18 6L6 18"></path>';
               <p>{e.summary}</p>
               <div class="ecard-actions">
                 {e.rsvpUrl && <a class="btn btn-primary btn-sm" href={e.rsvpUrl} target="_blank" rel="noopener">RSVP</a>}
+                {/* data-event is this event's position in eventData; site.js opens the popup for it. */}
                 <button class="btn btn-outline-dk btn-sm" data-event={i}>Learn more</button>
               </div>
             </div>
@@ -173,6 +189,8 @@ const x = '<path d="M6 6l12 12M18 6L6 18"></path>';
       <div style="margin-bottom:40px">
         <Title script="Previous" heading="Events"><p class="sub">Tap an event to see its photos.</p></Title>
       </div>
+      {/* data-album is each album's position in albums.json; site.js opens the photo popup for it.
+          On phones site.js collapses this grid to three albums until "See all past events" is tapped. */}
       <div class="albums" id="albums">
         {albums.map((a, i) => (
           <button class="album flow_in_up" style={step(i, 3)} data-album={i}>
@@ -234,6 +252,7 @@ const x = '<path d="M6 6l12 12M18 6L6 18"></path>';
     </div></div>
   </dialog>
 
+  {/* Event and album data for site.js. JSON blocks don't run; site.js reads them with JSON.parse. */}
   <script type="application/json" id="events-data" set:html={JSON.stringify(eventData)}></script>
   <script type="application/json" id="albums-data" set:html={JSON.stringify(albumData)}></script>
 </Base>

@@ -1,4 +1,6 @@
 ---
+// <MaybeLink href=...>: use for any link whose URL comes from src/content and may still be blank.
+// Outside links (http/https) open in a new tab unless external={false}. Extra attributes are passed through.
 // Renders a link when a URL is set in src/content, and plain text until then.
 const { href = '', external = true, class: className, ...rest } = Astro.props;
 const ext = external && /^https?:/.test(href);

@@ -1,4 +1,18 @@
 // Small enhancements for the MULC site. Every page still works without JavaScript.
+// Loaded on every page by layouts/Base.astro. Each block below checks that its elements exist,
+// so a feature only runs on the page that has it.
+//
+// Sections:
+//   Mobile menu ............ header menu button (all pages)
+//   Events carousel ........ arrows and dots for Upcoming Events (Home)
+//   Previous events ........ "See all past events" on phones (Home)
+//   Popups ................. event details and photo albums (Home)
+//   Partner inquiry popup .. form toggle and Formspree sending (Partner with us)
+//   Scroll reveals ......... flow_in_* / fade_in animations (all pages)
+//   Header tuck ............ header hides while scrolling down on desktop
+//   Background video ....... pauses for reduced-motion visitors
+
+// Shorthand: $ finds one element, $$ finds all of them as an array.
 const $ = (s, r = document) => r.querySelector(s);
 const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
 
@@ -27,6 +41,9 @@ const track = $('#track');
 if (track) {
   const dots = $('#dots');
   const cards = () => $$('.ecard', track);
+  // Measured live, so the maths follows the CSS at every screen width:
+  // step = one card plus the gap, perView = cards visible at once, pagesCount = scroll positions
+  // (one dot each), current = index of the card at the left edge.
   const step = () => cards()[0].offsetWidth + parseFloat(getComputedStyle(track).columnGap);
   const perView = () => Math.max(1, Math.round(track.clientWidth / step()));
   const pagesCount = () => Math.max(1, cards().length - perView() + 1);
@@ -35,6 +52,7 @@ if (track) {
     const c = cards()[Math.max(0, Math.min(i, cards().length - 1))];
     track.scrollTo({ left: c.offsetLeft - track.offsetLeft, behavior: 'smooth' });
   };
+  // Highlight the current dot and disable an arrow at either end.
   const sync = () => {
     const i = Math.min(current(), pagesCount() - 1);
     $$('button', dots).forEach((d, j) => d.setAttribute('aria-current', String(j === i)));
@@ -50,6 +68,7 @@ if (track) {
   $('#prevEv').addEventListener('click', () => go(current() - 1));
   $('#nextEv').addEventListener('click', () => go(current() + 1));
   track.addEventListener('scroll', () => requestAnimationFrame(sync), { passive: true });
+  // Cards per view changes with the screen width, and so does the number of dots.
   window.addEventListener('resize', buildDots);
   buildDots();
 }
@@ -68,21 +87,26 @@ if (albumGrid && albumsMore && $$('.album', albumGrid).length > 3) {
 }
 
 // ----- Popups (event details, photo albums) -----
+// The event and album details come from the <script type="application/json"> blocks in index.astro.
 const readJSON = (id) => JSON.parse($(id)?.textContent || '[]');
 const events = readJSON('#events-data');
 const albums = readJSON('#albums-data');
 
+// Clicking the dark backdrop (the <dialog> itself) or any [data-close] button closes a popup.
+// Escape closes it too; that is built into <dialog>.
 $$('dialog').forEach((d) => {
   d.addEventListener('click', (e) => {
     if (e.target === d || e.target.closest('[data-close]')) d.close();
   });
 });
 
+// Show a popup button only when it has somewhere to go.
 const setLink = (el, href) => {
   el.hidden = !href;
   if (href) el.href = href;
 };
 
+// One listener for every "Learn more" (data-event) and album (data-album) button.
 document.addEventListener('click', (e) => {
   const t = e.target.closest('[data-event],[data-album]');
   if (!t) return;
@@ -115,6 +139,7 @@ document.addEventListener('click', (e) => {
         photos.append(img);
       });
     } else {
+      // No photos yet: show six grey placeholders so the layout can be checked.
       for (let i = 1; i <= 6; i++) {
         const ph = document.createElement('div');
         ph.textContent = `[Photo ${i}]`;
@@ -132,6 +157,7 @@ const inq = $('#dlg-inquiry');
 if (inq) {
   const form = $('#inq-form');
   const status = $('#inq-status');
+  // Switch the "I'm interested in" toggle; the event dropdown only shows for event sponsorship.
   const pick = (kind) => {
     $$('.seg button', inq).forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.kind === kind)));
     $('#inq-interest').value = kind === 'event' ? 'Sponsoring an event' : 'General sponsorship';
@@ -172,6 +198,7 @@ if (inq) {
 // Elements with flow_in_up / flow_in_left / fade_in / flow_in_top / flow_in_bottom get .visible
 // as soon as their top edge is a little way into the viewport, so each one animates while the
 // page is still reaching it. .visible is never removed, so nothing animates back out.
+// Tells the safety timer in Base.astro that this script loaded, so it leaves the animations on.
 window.mulcReveal = true;
 let pending = $$('.flow_in_up, .flow_in_left, .fade_in, .flow_in_top, .flow_in_bottom');
 const reveal = () => {
@@ -181,6 +208,7 @@ const reveal = () => {
     const shift = el.classList.contains('flow_in_bottom') ? r.height : el.classList.contains('flow_in_top') ? -1.3 * r.height : 0;
     const top = r.top - shift;
     const bottom = r.bottom - shift;
+    // Keep waiting while the element is still below the fold (its top not yet 15% up into view).
     if (bottom > innerHeight && top > innerHeight * 0.85) return true;
     el.classList.add('visible');
     // Once it has arrived, drop the stagger delay so hover effects respond straight away.
@@ -188,6 +216,7 @@ const reveal = () => {
     return false;
   });
 };
+// Scroll and resize fire many times a second; this runs the work at most once per frame.
 let queued = false;
 const onScroll = () => {
   if (queued) return;

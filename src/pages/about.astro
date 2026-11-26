@@ -1,4 +1,10 @@
 ---
+// About Us page (/about/). Sections: header over the optional aboutImage photo, Mission, History
+// timeline, the exec team grid and the faculty advisor card.
+//
+// Content: site.json (aboutImage, mission, history, execTerm, advisor) and execs.json.
+// Headshots: give "photo" as a .jpg in execs.json and put a .webp with the same name next to it;
+// browsers that support WebP load that smaller file. With no photo, the exec's initial shows.
 import Base from '../layouts/Base.astro';
 import Title from '../components/Title.astro';
 import MaybeLink from '../components/MaybeLink.astro';
@@ -61,6 +67,7 @@ const step = (i, cols) => `--d:${((i % cols) * 0.1).toFixed(2)}s`;
     </div>
   </section>
 
+  {/* The advisor section only appears once site.json advisor.name is filled in. */}
   {site.advisor?.name && (
     <section class="advisor" id="advisor" aria-labelledby="advisor-h">
       <div class="wrap">

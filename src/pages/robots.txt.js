@@ -1,3 +1,4 @@
+// Generated file: /robots.txt (a .js file in src/pages/ becomes a file at that address).
 // Builds /robots.txt with the full address of the sitemap.
 // Note: search engines only read robots.txt at the root of a domain. While the site lives at
 // lem-d.github.io/MULC-Website/ this file is a harmless extra; it starts working once the site

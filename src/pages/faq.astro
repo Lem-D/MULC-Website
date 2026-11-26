@@ -1,4 +1,8 @@
 ---
+// FAQ page (/faq/). An accordion of questions from faq.json, then a "Club documents" item
+// (constitution PDFs from documents.json) and an "Email the club" box.
+// All items share name="faq", so opening one closes the others (built into the browser, no JS).
+// Other pages link to /faq/#documents to open the documents item directly (script at the bottom).
 import Base from '../layouts/Base.astro';
 import Title from '../components/Title.astro';
 import MaybeLink from '../components/MaybeLink.astro';
