@@ -1,4 +1,22 @@
-/* MULC site styles. Brand tokens live in :root; change them here to restyle the whole site. */
+/* MULC site styles. Brand tokens live in :root; change them here to restyle the whole site.
+   One stylesheet for every page, loaded by src/layouts/Base.astro. Astro minifies it on build.
+
+   Contents (search for the heading to jump there):
+     Base (tokens, reset, focus rings, .wrap)    Script-over-serif title lockup    Buttons
+     Header    Hero    Stand for    Events carousel    Sponsors    Previous events    Join band
+     Footer    About    FAQ    Dialogs    Placeholder link    Hover lift on cards    Scroll reveals
+     Header slides out of view    Fixed, darkened background    Shared bits    Partner with us
+     Partner inquiry popup
+     Join    FAQ: Club documents    Phones: the main call-to-action    404 page    Footer logo
+
+   Screen widths used in @media rules: 1199px (tablet and below), 980/900/860px (two-column
+   layouts), 760px (phones: hero, header, stats), 600px and 560px (small phones), 420/359px
+   (very narrow phones). Desktop-only behaviour uses min-width:1024px.
+
+   Colour tokens: --bg/--bg-2/--bg-3 dark wine surfaces, --cream text and light cards,
+   --burgundy buttons and accents, --rose script headings and links, --muted/--soft/--faint
+   secondary text on dark, --on-paper* text on cream. Fonts: --script (Pinyon Script),
+   --display (Libre Caslon Display), --body (Inter); loaded from Google Fonts in Base.astro. */
 :root{
   --bg:#1A1214; --bg-2:#241719; --bg-3:#2B1C1F; --ink-bg:#120C0D;
   --line:#3A2A2D; --cream:#FDFBF5; --paper-line:#E5D9D3;
@@ -9,6 +27,7 @@
   --body:Inter, system-ui, -apple-system, 'Segoe UI', sans-serif;
   color-scheme:dark;
 }
+/* Base */
 *{box-sizing:border-box}
 [hidden]{display:none!important}
 html{scroll-behavior:smooth}
