@@ -1,27 +1,7 @@
 [
   {
-    "name": "[Sponsor name]",
-    "logo": "",
-    "url": ""
-  },
-  {
-    "name": "[Sponsor name]",
-    "logo": "",
-    "url": ""
-  },
-  {
-    "name": "[Sponsor name]",
-    "logo": "",
-    "url": ""
-  },
-  {
-    "name": "[Sponsor name]",
-    "logo": "",
-    "url": ""
-  },
-  {
-    "name": "[Sponsor name]",
-    "logo": "",
-    "url": ""
+    "name": "Barr LLP",
+    "logo": "images/sponsors/barr-llp.png",
+    "url": "https://barrllp.com/"
   }
 ]
