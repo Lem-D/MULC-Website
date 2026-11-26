@@ -40,7 +40,7 @@ const step = (i, cols) => `--d:${((i % cols) * 0.1).toFixed(2)}s`;
     <div class="wrap">
       <div class="team-head">
         <Title script="The" heading="Executives" center />
-        <span class="yr fade_in" style="--d:.2s">2026–2027</span>
+        {site.execTerm && <span class="yr fade_in" style="--d:.2s">{site.execTerm}</span>}
       </div>
       <div class="execs">
         {execs.map((p, i) => (

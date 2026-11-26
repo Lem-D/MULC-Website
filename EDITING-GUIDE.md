@@ -19,6 +19,10 @@ If you get stuck, ask whoever looks after the website (the VP who set it up), or
    | Photo albums of past events | `src/content/albums.json` |
    | Exec team (About Us) | `src/content/execs.json` |
    | Club email, socials, homepage text | `src/content/site.json` |
+   | Numbers: members, events, partners (every page) | `src/content/stats.json` |
+   | Exec team year, faculty advisor | `src/content/site.json` |
+
+   Everything you can change is in the `src/content/` folder. Its `README.md` has the full list.
 
 ## Editing a file on GitHub (the same every time)
 

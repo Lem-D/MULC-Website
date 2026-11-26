@@ -1,0 +1,12 @@
+{
+  "numbers": {
+    "members": { "value": "566", "label": "Active Members" },
+    "events": { "value": "[00]", "label": "Events hosted" },
+    "founded": { "value": "2021", "label": "Founded" },
+    "partners": { "value": "[00]", "label": "Partners" },
+    "eventsPerYear": { "value": "[00]", "label": "Events a year" },
+    "avgAttendance": { "value": "[000]", "label": "Avg. attendance" }
+  },
+  "home": ["members", "events", "founded", "partners"],
+  "partners": ["members", "eventsPerYear", "avgAttendance", "partners"]
+}

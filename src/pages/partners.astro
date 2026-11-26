@@ -2,10 +2,13 @@
 import Base from '../layouts/Base.astro';
 import MaybeLink from '../components/MaybeLink.astro';
 import partners from '../content/partners.json';
+import { statsFor, fillStats } from '../lib/stats.js';
 import sponsors from '../content/sponsors.json';
 import events from '../content/events.json';
 import { url, asset } from '../lib/url.js';
 
+const stats = statsFor('partners');
+const pitch = fillStats(partners.pitch);
 const step = (i, cols) => `--d:${((i % cols) * 0.1).toFixed(2)}s`;
 const hasEmail = partners.email.includes('@');
 const mailto = hasEmail ? `mailto:${partners.email}` : '';
@@ -30,7 +33,7 @@ const down = '<path d="M12 4v12M6 11l6 6 6-6M5 20h14"></path>';
           <span class="s">Partner with</span>
           <h1 class="d">MacEwan's future lawyers</h1>
         </div>
-        <p class="lede flow_in_left" style="--d:.12s">{partners.pitch}</p>
+        <p class="lede flow_in_left" style="--d:.12s">{pitch}</p>
         <div class="row flow_in_left" style="--d:.24s">
           <a class="btn btn-primary" href="#contact" data-inquiry="event">Sponsor an event</a>
           <a class="btn btn-ghost" href="#contact" data-inquiry="general">Become a general sponsor</a>
@@ -46,7 +49,7 @@ const down = '<path d="M12 4v12M6 11l6 6 6-6M5 20h14"></path>';
 
   <section class="p-stats" aria-label="MULC in numbers">
     <div class="wrap">
-      {partners.stats.map((s, i) => <div class="stat flow_in_up" style={step(i, 4)}><b>{s.value}</b><span>{s.label}</span></div>)}
+      {stats.map((s, i) => <div class="stat flow_in_up" style={step(i, 4)}><b>{s.value}</b><span>{s.label}</span></div>)}
     </div>
   </section>
 

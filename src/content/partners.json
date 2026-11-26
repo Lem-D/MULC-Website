@@ -1,13 +1,7 @@
 {
-  "pitch": "MULC connects [000] MacEwan students with the legal community through speaker nights, mock trials and networking. Partners get in front of motivated pre-law students early, and you'll always hear back from the club directly.",
+  "pitch": "MULC connects {members} MacEwan students with the legal community through speaker nights, mock trials and networking. Partners get in front of motivated pre-law students early, and you'll always hear back from the club directly.",
   "email": "mulawclub@gmail.com",
   "formspreeId": "",
-  "stats": [
-    { "value": "[000]", "label": "Members" },
-    { "value": "[00]", "label": "Events a year" },
-    { "value": "[000]", "label": "Avg. attendance" },
-    { "value": "[00]", "label": "Partners so far" }
-  ],
   "options": [
     {
       "kind": "event",

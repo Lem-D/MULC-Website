@@ -5,6 +5,7 @@ import JoinButton from '../components/JoinButton.astro';
 import CampusLabsButton from '../components/CampusLabsButton.astro';
 import MaybeLink from '../components/MaybeLink.astro';
 import site from '../content/site.json';
+import { statsFor } from '../lib/stats.js';
 import events from '../content/events.json';
 import sponsors from '../content/sponsors.json';
 import albums from '../content/albums.json';
@@ -92,7 +93,7 @@ const x = '<path d="M6 6l12 12M18 6L6 18"></path>';
     </div>
     <div class="wrap">
       <div class="stats">
-        {site.stats.map((s, i) => <div class="stat flow_in_up" style={step(i, 4)}><b>{s.value}</b><span>{s.label}</span></div>)}
+        {statsFor('home').map((s, i) => <div class="stat flow_in_up" style={step(i, 4)}><b>{s.value}</b><span>{s.label}</span></div>)}
       </div>
     </div>
   </section>

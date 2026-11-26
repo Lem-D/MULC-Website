@@ -14,6 +14,7 @@
   "campusLabsUrl": "https://samu.campuslabs.ca/engage/organization/mulc",
   "joinBlurb": "Membership runs through MacEwan's Campus Labs. It takes about two minutes with your MacEwan login.",
   "email": "mulawclub@gmail.com",
+  "execTerm": "2026–2027",
   "location": {
     "lines": ["MacEwan University", "10700 104 Ave NW", "Edmonton, AB T5J 4S2"],
     "mapsUrl": ""
@@ -22,12 +23,6 @@
     { "label": "Instagram", "url": "https://www.instagram.com/macewanlawclub/" },
     { "label": "LinkedIn", "url": "https://www.linkedin.com/in/mulc/" },
     { "label": "Facebook", "url": "https://www.facebook.com/MULawClub" }
-  ],
-  "stats": [
-    { "value": "566", "label": "Active Members" },
-    { "value": "[00]", "label": "Events hosted" },
-    { "value": "2021", "label": "Founded" },
-    { "value": "[00]", "label": "Partners" }
   ],
   "standFor": {
     "intro": "We strive to connect students with legal professionals, build community and leadership, and offer hands-on learning through shadowing opportunities.",

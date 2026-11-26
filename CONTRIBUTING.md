@@ -63,12 +63,21 @@ Every **Join MULC** button goes to the Join page (`/join/`), which sends student
 - `campusLabsUrl` in `src/content/site.json`: MULC's Campus Labs page, e.g. `"https://samu.campuslabs.ca/engage/organization/mulc"`. Until it's set, the Campus Labs buttons show "Campus Labs link coming soon". Event RSVPs fall back to this page's `/events`.
 - `src/content/join.json`: the intro, the 4 steps and the requirements. The requirements follow Article III of the constitution, so update them if the constitution changes.
 
+## Stats (members, events, partners...)
+
+Every number on the site lives in `src/content/stats.json`, so you only change it once.
+
+- `numbers`: each stat's `value` and `label`, e.g. `"members": { "value": "566", "label": "Active Members" }`.
+- `home` and `partners`: which stats show on the Home page and the Partner with us page, in order.
+- In page text, `{members}` (or any other stat name) is replaced with that stat's number.
+
 ## Club info and socials
 
 Edit `src/content/site.json`:
 
 - `email`, `socials` and `location.mapsUrl`: links only appear once a URL is filled in.
-- `stats`, `standFor`, `mission` and `history`: the text on Home and About Us.
+- `standFor`, `mission` and `history`: the text on Home and About Us.
+- `execTerm`: the school year shown next to The Executives on About Us, e.g. `"2026–2027"`.
 - `advisor`: the faculty advisor card on About Us (`name`, `role`, `photo`, `department`, `bio`, `profileUrl`), shown below the executives. Empty `name` hides it.
 - `heroImage`: the team photo at the top of the Home page (landscape). On computers it sits on the right and fades into the dark behind the text; on tablets and phones it is a band above the text. Put it in `public/images/hero/` and set e.g. `"images/hero/team.jpg"`.
 - `heroImageWidths`: optional. If you list widths like `[960, 1440, 1920]`, the page loads resized copies named `team-960.jpg` + `team-960.webp` and so on (they must all exist), so phones download a small file. Leave it out or `[]` to use the single file as is.
@@ -90,7 +99,7 @@ Edit `src/content/faq.json` for the questions. The **Club documents** dropdown a
 - `src/content/partners.json`: everything else on the **Partner with us** page.
   - `email`: the one general partnerships address shown on the page.
   - `formspreeId`: the inquiry popup sends through [Formspree](https://formspree.io). Create a form there, then paste the ID from its endpoint (`https://formspree.io/f/abcdwxyz` -> `"abcdwxyz"`). Until it's set, the popup shows but its Send button is switched off.
-  - `stats`, `pitch`, `options` (the two sponsorship cards and their perks).
+  - `pitch`, `options` (the two sponsorship cards and their perks). `{members}` in `pitch` becomes the member count from `stats.json`.
   - `package.pdf`: put the sponsorship package in `public/docs/` and set e.g. `"docs/sponsorship-package-2026-2027.pdf"`. This turns on **Download PDF** and **View online**. `package.viewUrl` is optional, for an online version (e.g. a Canva link) that should open instead of the PDF. Update `package.details` with the page count and date.
 
 ## Link previews
