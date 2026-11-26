@@ -47,6 +47,10 @@ header.site{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;backgrou
 header.site .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:72px}
 .brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--cream)}
 .brand img{width:44px;height:44px;border-radius:50%}
+.brand .brand-lockup{width:auto;height:46px;border-radius:0}
+@media (max-width:760px){.brand .brand-lockup{height:38px}}
+@media (max-width:420px){.brand .brand-lockup{width:auto;height:30px}}
+@media (max-width:359px){.brand .brand-lockup{height:26px}}
 .brand span{font-family:var(--display);font-size:20px;letter-spacing:.06em;text-transform:uppercase}
 nav.main{display:flex;align-items:center;gap:28px;font-size:15px}
 nav.main a.nl{color:var(--muted);text-decoration:none;padding:6px 0;border-bottom:1px solid transparent}
@@ -164,6 +168,9 @@ section{scroll-margin-top:80px}
 .ecard-photo{position:relative;height:190px;background:#3A2A2D;display:flex;align-items:center;justify-content:center;flex-shrink:0}
 .ecard-photo img{width:100%;height:100%;object-fit:cover;display:block}
 .ecard-photo .ph{color:var(--soft)}
+/* Events without a photo show the club logo instead */
+.ecard-logo{width:88px;height:88px;border-radius:50%;object-fit:cover}
+.ecard-photo .ecard-logo{width:88px;height:88px}
 .ecard-photo .date-disc{position:absolute;left:20px;bottom:-28px;border:3px solid var(--cream)}
 .ecard-in{padding:40px 22px 22px;display:flex;flex-direction:column;gap:12px;flex-grow:1}
 .date-disc{width:60px;height:60px;border-radius:50%;background:var(--burgundy);color:var(--cream);display:flex;flex-direction:column;align-items:center;justify-content:center;flex-shrink:0;line-height:1}
@@ -258,6 +265,14 @@ footer.site{background:var(--ink-bg);border-top:1px solid var(--line);padding-bl
 .adv-card .adv-bio{max-width:68ch;margin:6px 0 10px;font-size:16px;line-height:1.7;color:inherit}
 @media (max-width:719px){.adv-card{justify-content:center}.adv-photo{margin-inline:auto}}
 .history{padding-block:96px;background:var(--bg-2)}
+/* About Us: event photo behind the top sections (site.json aboutImage). */
+.about-top{position:relative;isolation:isolate}
+.about-bg{position:absolute;inset:0 0 auto;z-index:-1;overflow:hidden;aspect-ratio:3/2;max-height:100%}
+.about-bg img{width:100%;height:100%;object-fit:cover;object-position:center 40%;filter:blur(4px) saturate(.85);transform:scale(1.04)}
+.about-bg::after{content:"";position:absolute;inset:0;background:linear-gradient(to bottom,rgba(26,18,20,.70) 0%,rgba(26,18,20,.76) 40%,rgba(26,18,20,.86) 70%,rgba(26,18,20,.96) 90%,var(--bg) 100%)}
+.about-top.has-photo .history{background:transparent}
+@media (max-width:760px){.about-bg{aspect-ratio:auto;height:440px}}
+.about-top.has-photo .page-head,.about-top.has-photo .mission,.about-top.has-photo .history{text-shadow:0 1px 12px rgba(18,12,13,.7)}
 .timeline{margin-top:48px;display:grid;grid-template-columns:repeat(4,1fr);gap:32px}
 @media (max-width:900px){.timeline{grid-template-columns:repeat(2,1fr)}}
 @media (max-width:500px){.timeline{grid-template-columns:1fr}}
@@ -315,6 +330,8 @@ dialog[open]{animation:pop .2s ease}
 .x{position:absolute;top:14px;right:14px;width:44px;height:44px;border-radius:50%;border:1px solid var(--paper-line);background:var(--cream);color:var(--burgundy-dk);cursor:pointer;display:flex;align-items:center;justify-content:center}
 .dlg-body{padding:32px 40px 36px;display:flex;flex-direction:column;gap:22px}
 @media (max-width:600px){.dlg-body{padding:24px 20px 28px}.dlg-hero{height:150px}}
+/* Event popup photo: 2:1 so posters and banners keep their text in view */
+.dlg-hero{height:auto;aspect-ratio:2/1;max-height:45vh}
 .dlg .s{font-family:var(--script);font-size:36px;line-height:1;color:var(--burgundy)}
 .dlg h2{margin:0;font-family:var(--display);font-weight:400;font-size:clamp(28px,4vw,36px);color:var(--burgundy-dk)}
 .facts{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;padding:18px 0;border-top:1px solid var(--paper-line);border-bottom:1px solid var(--paper-line)}

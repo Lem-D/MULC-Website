@@ -10,6 +10,8 @@ import { asset } from '../lib/url.js';
 const step = (i, cols) => `--d:${((i % cols) * 0.1).toFixed(2)}s`;
 ---
 <Base title="About Us" current="about" description="Meet the MacEwan Law Club: our mission, our history since 2021, the executive team running the club this year, and our faculty advisor.">
+  <div class:list={['about-top', { 'has-photo': site.aboutImage }]}>
+  {site.aboutImage && <div class="about-bg" aria-hidden="true"><img src={asset(site.aboutImage)} alt="" decoding="async"></div>}
   <section class="page-head">
     <div class="wrap">
       <Title script="About" heading="Us" level={1} center />
@@ -35,6 +37,7 @@ const step = (i, cols) => `--d:${((i % cols) * 0.1).toFixed(2)}s`;
       </div>
     </div>
   </section>
+  </div>
 
   <section class="team" id="team">
     <div class="wrap">

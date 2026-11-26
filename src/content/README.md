@@ -19,7 +19,7 @@ Each file is JSON. Only change the text **between the quote marks** on the right
 | Club documents (constitution PDFs) | `documents.json` |
 | Club email, social links, Campus Labs link, address | `site.json` |
 | Home page wording: tagline, intro, What we stand for, hero photo | `site.json` |
-| About page wording: mission, history timeline | `site.json` |
+| About page wording: mission, history timeline, background photo (`aboutImage`) | `site.json` |
 
 ## Numbers (`stats.json`)
 
