@@ -66,7 +66,7 @@ const standImage = site.standForImage ? asset(site.standForImage) : hero?.src;
 // Must match the phone breakpoint for the hero in global.css.
 const phoneMedia = '(max-width: 760px)';
 // Below 1200px the photo spans the full width; above it, the photo sits in about 60% on the right.
-const heroSizes = '100vw';
+const heroSizes = '(max-width: 1199px) 100vw, 60vw';
 // Close (X) icon used by both popups.
 const x = '<path d="M6 6l12 12M18 6L6 18"></path>';
 ---
