@@ -248,11 +248,15 @@ footer.site{background:var(--ink-bg);border-top:1px solid var(--line);padding-bl
 .mission .copy{flex:999 1 520px;min-width:0;display:flex;flex-direction:column;gap:18px}
 .mission .big{margin:0;font-family:var(--display);font-size:clamp(24px,3vw,30px);line-height:1.35}
 .mission .copy p:last-child{margin:0;font-size:17px;line-height:1.7;color:var(--muted)}
-.advisor{padding-block:0 96px}
-.adv-card{max-width:640px;margin-inline:auto;text-align:center;display:flex;flex-direction:column;align-items:center;gap:10px;padding:36px 28px;border:1px solid rgba(217,163,168,.35);border-radius:6px}
+.advisor{padding-block:0 112px}
+.adv-card{display:flex;flex-wrap:wrap-reverse;align-items:center;justify-content:space-between;gap:32px 56px;padding:48px clamp(24px,5vw,64px);border:1px solid rgba(217,163,168,.35);border-radius:6px}
+.adv-text{flex:1 1 420px;min-width:0;display:flex;flex-direction:column;align-items:flex-start;gap:10px}
+.adv-photo{flex:0 0 auto;width:clamp(180px,22vw,260px);height:auto;aspect-ratio:1;border-radius:50%;object-fit:cover;border:3px solid var(--rose)}
 .adv-role{font-family:var(--script);font-size:34px;line-height:1;color:var(--rose)}
 .adv-card h2{margin:0;font-family:var(--display);font-weight:400;font-size:clamp(26px,3.4vw,34px);letter-spacing:.04em;text-transform:uppercase}
-.adv-card p{margin:0 0 8px;font-size:15px;color:var(--muted)}
+.adv-card p{margin:0;font-size:15px;color:var(--muted)}
+.adv-card .adv-bio{max-width:68ch;margin:6px 0 10px;font-size:16px;line-height:1.7;color:inherit}
+@media (max-width:719px){.adv-card{justify-content:center}.adv-photo{margin-inline:auto}}
 .history{padding-block:96px;background:var(--bg-2)}
 .timeline{margin-top:48px;display:grid;grid-template-columns:repeat(4,1fr);gap:32px}
 @media (max-width:900px){.timeline{grid-template-columns:repeat(2,1fr)}}

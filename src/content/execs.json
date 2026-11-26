@@ -1,50 +1,50 @@
 [
   {
-    "name": "Moselle Namoc",
+    "name": "Moselle",
     "role": "President",
-    "program": "Legal Studies",
-    "bio": "President of Law Club",
-    "photo": "",
+    "program": "",
+    "bio": "",
+    "photo": "images/execs/moselle.jpg",
     "linkedin": ""
   },
   {
-    "name": "Name",
+    "name": "Mabel",
     "role": "Vice President",
-    "program": "[Program, year]",
-    "bio": "[One line bio]",
-    "photo": "",
+    "program": "",
+    "bio": "",
+    "photo": "images/execs/mabel.jpg",
     "linkedin": ""
   },
   {
-    "name": "Name",
+    "name": "Halle",
     "role": "VP of Events",
-    "program": "[Program, year]",
-    "bio": "[One line bio]",
-    "photo": "",
+    "program": "",
+    "bio": "",
+    "photo": "images/execs/halle.jpg",
     "linkedin": ""
   },
   {
-    "name": "Name",
+    "name": "Kanwar",
     "role": "VP of Finance",
-    "program": "[Program, year]",
-    "bio": "[One line bio]",
-    "photo": "",
+    "program": "",
+    "bio": "",
+    "photo": "images/execs/kanwar.jpg",
     "linkedin": ""
   },
   {
-    "name": "Name",
+    "name": "Maria",
     "role": "VP of Marketing",
-    "program": "[Program, year]",
-    "bio": "[One line bio]",
-    "photo": "",
+    "program": "",
+    "bio": "",
+    "photo": "images/execs/maria.jpg",
     "linkedin": ""
   },
   {
-    "name": "Name",
+    "name": "Matthew",
     "role": "VP of Operations",
-    "program": "[Program, year]",
-    "bio": "[One line bio]",
-    "photo": "",
+    "program": "",
+    "bio": "",
+    "photo": "images/execs/matthew.jpg",
     "linkedin": ""
   }
 ]

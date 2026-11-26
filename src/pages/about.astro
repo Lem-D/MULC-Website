@@ -9,7 +9,7 @@ import { asset } from '../lib/url.js';
 // Head start for each item in a row of `cols`, so a row lands left to right.
 const step = (i, cols) => `--d:${((i % cols) * 0.1).toFixed(2)}s`;
 ---
-<Base title="About Us" current="about" description="Meet the MacEwan Law Club: our mission, our faculty advisor, our history since 2021, and the executive team running the club this year.">
+<Base title="About Us" current="about" description="Meet the MacEwan Law Club: our mission, our history since 2021, the executive team running the club this year, and our faculty advisor.">
   <section class="page-head">
     <div class="wrap">
       <Title script="About" heading="Us" level={1} center />
@@ -26,19 +26,6 @@ const step = (i, cols) => `--d:${((i % cols) * 0.1).toFixed(2)}s`;
       </div>
     </div>
   </section>
-
-  {site.advisor?.name && (
-    <section class="advisor" id="advisor" aria-labelledby="advisor-h">
-      <div class="wrap">
-        <div class="adv-card flow_in_up">
-          <span class="adv-role" id="advisor-h">{site.advisor.role}</span>
-          <h2>{site.advisor.name}</h2>
-          {site.advisor.department && <p>{site.advisor.department}, MacEwan University</p>}
-          {site.advisor.profileUrl && <a class="btn btn-ghost btn-sm" href={site.advisor.profileUrl} target="_blank" rel="noopener">MacEwan faculty profile<svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" set:html={'<path d="M7 17L17 7M9 7h8v8"></path>'}></svg></a>}
-        </div>
-      </div>
-    </section>
-  )}
 
   <section class="history" id="history">
     <div class="wrap">
@@ -59,15 +46,32 @@ const step = (i, cols) => `--d:${((i % cols) * 0.1).toFixed(2)}s`;
         {execs.map((p, i) => (
           <article class="exec flow_in_up" style={step(i, 3)}><div class="exec-in">
             {p.photo
-              ? <img class="shot" src={asset(p.photo)} alt={`${p.name}, ${p.role}`} style="object-fit:cover" loading="lazy">
+              ? <picture style="display:contents"><source type="image/webp" srcset={asset(p.photo.replace(/\.jpe?g$/i, '.webp'))}><img class="shot" src={asset(p.photo)} alt={`${p.name}, ${p.role}`} width="400" height="400" style="object-fit:cover;height:auto" loading="lazy"></picture>
               : <div class="shot"><b>{p.name.charAt(0)}</b><span class="ph">[Headshot]</span></div>}
             <h3>{p.name}</h3>
             <span class="role">{p.role}</span>
-            <p>{p.program} · {p.bio}</p>
+            {(p.program || p.bio) && <p>{[p.program, p.bio].filter(Boolean).join(' · ')}</p>}
             {p.linkedin && <MaybeLink href={p.linkedin} class="li">LinkedIn</MaybeLink>}
           </div></article>
         ))}
       </div>
     </div>
   </section>
+
+  {site.advisor?.name && (
+    <section class="advisor" id="advisor" aria-labelledby="advisor-h">
+      <div class="wrap">
+        <div class="adv-card flow_in_up">
+          <div class="adv-text">
+            <span class="adv-role" id="advisor-h">{site.advisor.role}</span>
+            <h2>{site.advisor.name}</h2>
+            {site.advisor.department && <p class="adv-dept">{site.advisor.department}, MacEwan University</p>}
+            {site.advisor.bio && <p class="adv-bio">{site.advisor.bio}</p>}
+            {site.advisor.profileUrl && <a class="btn btn-ghost btn-sm" href={site.advisor.profileUrl} target="_blank" rel="noopener">MacEwan faculty profile<svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" set:html={'<path d="M7 17L17 7M9 7h8v8"></path>'}></svg></a>}
+          </div>
+          {site.advisor.photo && <img class="adv-photo" src={asset(site.advisor.photo)} alt={site.advisor.name} width="300" height="300" loading="lazy">}
+        </div>
+      </div>
+    </section>
+  )}
 </Base>

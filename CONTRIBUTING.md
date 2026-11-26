@@ -69,7 +69,7 @@ Edit `src/content/site.json`:
 
 - `email`, `socials` and `location.mapsUrl`: links only appear once a URL is filled in.
 - `stats`, `standFor`, `mission` and `history`: the text on Home and About Us.
-- `advisor`: the faculty advisor card on About Us (`name`, `role`, `department`, `profileUrl`). Empty `name` hides it.
+- `advisor`: the faculty advisor card on About Us (`name`, `role`, `photo`, `department`, `bio`, `profileUrl`), shown below the executives. Empty `name` hides it.
 - `heroImage`: the team photo at the top of the Home page (landscape). On computers it sits on the right and fades into the dark behind the text; on tablets and phones it is a band above the text. Put it in `public/images/hero/` and set e.g. `"images/hero/team.jpg"`.
 - `heroImageWidths`: optional. If you list widths like `[960, 1440, 1920]`, the page loads resized copies named `team-960.jpg` + `team-960.webp` and so on (they must all exist), so phones download a small file. Leave it out or `[]` to use the single file as is.
 - `heroImagePhone` / `heroImagePhoneWidths`: optional taller crop used on phones (under 761px wide), same naming rules. Crop it so everyone is in frame with a little space around them. Leave `heroImagePhone` as `""` to use the landscape photo on phones too.

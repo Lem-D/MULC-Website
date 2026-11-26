@@ -24,7 +24,7 @@
     { "label": "Facebook", "url": "https://www.facebook.com/MULawClub" }
   ],
   "stats": [
-    { "value": "[000]", "label": "Members" },
+    { "value": "566", "label": "Active Members" },
     { "value": "[00]", "label": "Events hosted" },
     { "value": "2021", "label": "Founded" },
     { "value": "[00]", "label": "Partners" }
@@ -40,12 +40,14 @@
   },
   "mission": {
     "statement": "We strive to create a welcoming, all-inclusive environment to provide students with the necessary resources to better prepare for their future in the legal world.",
-    "body": "We strive to connect students with legal professionals, build community and leadership, and offer hands-on learning through shadowing opportunities."
+    "body": "We connect students with legal professionals, build community and leadership, and offer hands-on learning through shadowing opportunities."
   },
   "advisor": {
     "name": "Professor Mahan Ashouri",
     "role": "Faculty Advisor",
-    "department": "International Business, Marketing, Strategy and Law",
+    "photo": "images/advisor/ashouri.jpg",
+    "department": "Assistant Professor, International Business, Marketing, Strategy and Law",
+    "bio": "Professor Ashouri is an assistant professor of law who focuses on business law, international trade, international arbitration and the law of economic sanctions. He studied law at the University of Tehran and earned master's degrees in law from the University of Richmond and McGill University, where he also did his doctoral studies. Before joining MacEwan, he taught legal research and international dispute resolution at McGill and founded the McGill International Business and Trade Law Society.",
     "profileUrl": "https://www.macewan.ca/academics/academic-departments/international-business-marketing-strategy-law/our-people/profile/?profileid=ashourim"
   },
   "history": [
