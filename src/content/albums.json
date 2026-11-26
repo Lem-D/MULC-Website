@@ -1,44 +1,74 @@
 [
   {
-    "title": "[Past event title 1]",
-    "date": "[Month 20XX]",
-    "cover": "",
-    "photos": [],
+    "title": "Australia to You",
+    "date": "November 2026",
+    "cover": "images/albums/australia-to-you-2026/01.jpg",
+    "photos": [
+      "images/albums/australia-to-you-2026/01.jpg",
+      "images/albums/australia-to-you-2026/02.jpg",
+      "images/albums/australia-to-you-2026/03.jpg"
+    ],
+    "externalUrl": "https://www.instagram.com/reel/DgL6aR4SnWq/"
+  },
+  {
+    "title": "First General Member Meeting",
+    "date": "October 2026",
+    "cover": "images/albums/general-meeting-2026/01.jpg",
+    "photos": [
+      "images/albums/general-meeting-2026/01.jpg",
+      "images/albums/general-meeting-2026/02.jpg",
+      "images/albums/general-meeting-2026/03.jpg"
+    ],
+    "externalUrl": "https://www.instagram.com/reel/DenvJ3OREGV/"
+  },
+  {
+    "title": "UK to You",
+    "date": "October 2026",
+    "cover": "images/albums/uk-to-you-2026/02.jpg",
+    "photos": [
+      "images/albums/uk-to-you-2026/01.jpg",
+      "images/albums/uk-to-you-2026/02.jpg",
+      "images/albums/uk-to-you-2026/03.jpg"
+    ],
+    "externalUrl": "https://www.instagram.com/p/DeBoUOhGxdp/"
+  },
+  {
+    "title": "Fourth Annual Gala",
+    "date": "March 2026",
+    "cover": "images/albums/gala-2026/01.jpg",
+    "photos": [
+      "images/albums/gala-2026/01.jpg",
+      "images/albums/gala-2026/02.jpg",
+      "images/albums/gala-2026/03.jpg",
+      "images/albums/gala-2026/04.jpg",
+      "images/albums/gala-2026/05.jpg",
+      "images/albums/gala-2026/06.jpg",
+      "images/albums/gala-2026/07.jpg",
+      "images/albums/gala-2026/08.jpg",
+      "images/albums/gala-2026/09.jpg"
+    ],
     "externalUrl": ""
   },
   {
-    "title": "[Past event title 2]",
-    "date": "[Month 20XX]",
-    "cover": "",
-    "photos": [],
+    "title": "Annual General Meeting",
+    "date": "2025–2026",
+    "cover": "images/albums/agm-2025/01.jpg",
+    "photos": [
+      "images/albums/agm-2025/01.jpg",
+      "images/albums/agm-2025/02.jpg"
+    ],
     "externalUrl": ""
   },
   {
-    "title": "[Past event title 3]",
-    "date": "[Month 20XX]",
-    "cover": "",
-    "photos": [],
-    "externalUrl": ""
-  },
-  {
-    "title": "[Past event title 4]",
-    "date": "[Month 20XX]",
-    "cover": "",
-    "photos": [],
-    "externalUrl": ""
-  },
-  {
-    "title": "[Past event title 5]",
-    "date": "[Month 20XX]",
-    "cover": "",
-    "photos": [],
-    "externalUrl": ""
-  },
-  {
-    "title": "[Past event title 6]",
-    "date": "[Month 20XX]",
-    "cover": "",
-    "photos": [],
+    "title": "Shadow Program",
+    "date": "February 2025",
+    "cover": "images/albums/shadow-program-2025/01.jpg",
+    "photos": [
+      "images/albums/shadow-program-2025/01.jpg",
+      "images/albums/shadow-program-2025/02.jpg",
+      "images/albums/shadow-program-2025/03.jpg",
+      "images/albums/shadow-program-2025/04.jpg"
+    ],
     "externalUrl": ""
   }
 ]

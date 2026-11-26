@@ -147,7 +147,7 @@ const x = '<path d="M6 6l12 12M18 6L6 18"></path>';
         {eventData.map((e, i) => (
           <article class="ecard flow_in_up" style={step(i, 3)}>
             <div class="ecard-photo">
-              {e.image ? <img src={e.image} alt="" width="600" height="190" loading="lazy" decoding="async"> : <span class="ph">{e.dateTbd ? '[Event photo or past-year photo]' : '[Event photo]'}</span>}
+              {e.image ? <img src={e.image} alt="" width="600" height="190" loading="lazy" decoding="async"> : <img class="ecard-logo" src={asset('images/mulc-logo.jpg')} alt="" width="88" height="88" loading="lazy" decoding="async">}
               {e.dateTbd
                 ? <div class="date-disc tbd" aria-label="Date to be announced">TBD</div>
                 : <div class="date-disc"><small>{e.month}</small><b>{e.day}</b></div>}
@@ -202,7 +202,7 @@ const x = '<path d="M6 6l12 12M18 6L6 18"></path>';
   <!-- Event popup: filled in by src/scripts/site.js from the data below -->
   <dialog id="dlg-event" aria-labelledby="ev-title">
     <div class="dlg"><div class="dlg-in">
-      <div class="dlg-hero" id="ev-hero"><span class="ph">[Event poster or photo]</span>
+      <div class="dlg-hero" id="ev-hero"><img class="ph ecard-logo" src={asset('images/mulc-logo.jpg')} alt="" width="88" height="88">
         <button class="x" data-close aria-label="Close" autofocus><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" set:html={x}></svg></button>
       </div>
       <div class="dlg-body">
