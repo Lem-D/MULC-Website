@@ -20,7 +20,7 @@
   },
   "socials": [
     { "label": "Instagram", "url": "https://www.instagram.com/macewanlawclub/" },
-    { "label": "LinkedIn", "url": "https://www.linkedin.com/company/mulc/" },
+    { "label": "LinkedIn", "url": "https://www.linkedin.com/in/mulc/" },
     { "label": "Facebook", "url": "https://www.facebook.com/MULawClub" }
   ],
   "stats": [
@@ -30,7 +30,7 @@
     { "value": "[00]", "label": "Partners" }
   ],
   "standFor": {
-    "intro": "We strive to create a welcoming, all-inclusive environment that gives students the resources to prepare for their future in the legal world.",
+    "intro": "We strive to connect students with legal professionals, build community and leadership, and offer hands-on learning through shadowing opportunities.",
     "pillars": [
       { "title": "Explore the legal field", "body": "Open discussions about the work of lawyers, paralegals, legal assistants and more." },
       { "title": "See legal work up close", "body": "Shadow sessions that give students a taste of day-to-day legal work." },
@@ -39,8 +39,14 @@
     ]
   },
   "mission": {
-    "statement": "[Mission statement in one strong sentence.]",
-    "body": "[Two or three sentences expanding on who the club serves, what it offers, and why it matters to MacEwan students interested in law.]"
+    "statement": "We strive to create a welcoming, all-inclusive environment to provide students with the necessary resources to better prepare for their future in the legal world.",
+    "body": "We strive to connect students with legal professionals, build community and leadership, and offer hands-on learning through shadowing opportunities."
+  },
+  "advisor": {
+    "name": "Professor Mahan Ashouri",
+    "role": "Faculty Advisor",
+    "department": "International Business, Marketing, Strategy and Law",
+    "profileUrl": "https://www.macewan.ca/academics/academic-departments/international-business-marketing-strategy-law/our-people/profile/?profileid=ashourim"
   },
   "history": [
     { "year": "2021", "title": "Founded", "body": "[Who started the club and why.]" },

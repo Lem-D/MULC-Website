@@ -9,7 +9,7 @@ import { asset } from '../lib/url.js';
 // Head start for each item in a row of `cols`, so a row lands left to right.
 const step = (i, cols) => `--d:${((i % cols) * 0.1).toFixed(2)}s`;
 ---
-<Base title="About Us" current="about" description="Meet the MacEwan Law Club: our mission, our history since 2021, and the executive team running the club this year.">
+<Base title="About Us" current="about" description="Meet the MacEwan Law Club: our mission, our faculty advisor, our history since 2021, and the executive team running the club this year.">
   <section class="page-head">
     <div class="wrap">
       <Title script="About" heading="Us" level={1} center />
@@ -26,6 +26,19 @@ const step = (i, cols) => `--d:${((i % cols) * 0.1).toFixed(2)}s`;
       </div>
     </div>
   </section>
+
+  {site.advisor?.name && (
+    <section class="advisor" id="advisor" aria-labelledby="advisor-h">
+      <div class="wrap">
+        <div class="adv-card flow_in_up">
+          <span class="adv-role" id="advisor-h">{site.advisor.role}</span>
+          <h2>{site.advisor.name}</h2>
+          {site.advisor.department && <p>{site.advisor.department}, MacEwan University</p>}
+          {site.advisor.profileUrl && <a class="btn btn-ghost btn-sm" href={site.advisor.profileUrl} target="_blank" rel="noopener">MacEwan faculty profile<svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" set:html={'<path d="M7 17L17 7M9 7h8v8"></path>'}></svg></a>}
+        </div>
+      </div>
+    </section>
+  )}
 
   <section class="history" id="history">
     <div class="wrap">
