@@ -8,7 +8,9 @@ const hasEmail = site.email.includes('@');
 <footer class="site" id="contact">
   <div class="wrap">
     <div class="f-grid">
-      <div class="f-col f-brand"><img src={url('images/mulc-logo.jpg')} alt="" width="72" height="72" loading="lazy" decoding="async"><span class="nm">{site.name}</span></div>
+      <div class="f-col f-brand">{site.footerLogo
+        ? <img class="f-lockup" src={url(site.footerLogo)} alt={site.name} width="220" height="152" loading="lazy" decoding="async">
+        : <><img src={url('images/mulc-logo.jpg')} alt="" width="72" height="72" loading="lazy" decoding="async"><span class="nm">{site.name}</span></>}</div>
       <div class="f-col f-loc">
         <h2>Location</h2>
         <address>{site.location.lines.map((line, i) => <>{i > 0 && <br />}{line}</>)}</address>

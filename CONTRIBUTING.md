@@ -78,6 +78,7 @@ Edit `src/content/site.json`:
 - `email`, `socials` and `location.mapsUrl`: links only appear once a URL is filled in.
 - `standFor`, `mission` and `history`: the text on Home and About Us.
 - `aboutImage`: the event photo behind the top of About Us (title, mission, history), e.g. `"images/about/uk-to-you-2026.jpg"`. Put it in `public/images/about/`. Leave `""` for a plain background.
+- `headerLogo` / `footerLogo`: the logo images at the top and bottom of every page. Leave `""` to use the round seal.
 - `execTerm`: the school year shown next to The Executives on About Us, e.g. `"2026–2027"`.
 - `advisor`: the faculty advisor card on About Us (`name`, `role`, `photo`, `department`, `bio`, `profileUrl`), shown below the executives. Empty `name` hides it.
 - `heroImage`: the team photo at the top of the Home page (landscape). On computers it sits on the right and fades into the dark behind the text; on tablets and phones it is a band above the text. Put it in `public/images/hero/` and set e.g. `"images/hero/team.jpg"`.
